@@ -13,7 +13,9 @@ public class HongHuStart {
 	// 定义日志对象
 	private static Logger logger = LoggerFactory.getLogger(HongHuStart.class);
 	// 程序的入口类
-	public static void main(String... strings) {
-		logger.warn("Hello! 鸿鹄!");
+	public static void main(String[] args) {
+		logger.info("Hello! 鸿鹄!");
+		logger.info("开始迁移任务!");
+		logger.info("结束迁移任务!");
 	}
 }

@@ -7,12 +7,10 @@
     <!-- 上下文变量设置,用来定义变量值,其中name的值是变量的名称，value的值时变量定义的值。
         通过<property>定义的值会被插入到logger上下文中。定义变量后，可以使“${}”来使用变量。 -->
     <property name="CONTEXT_NAME" value="logback-honghu-log" />
-    <property name="logs" value="E:\larksource\A_open\ee\honghu\log\" />
     <!-- 上下文名称：<contextName>, 每个logger都关联到logger上下文，
         默认上下文名称为“default”。但可以使用<contextName>设置成其他名字，用于区分不同应用程序的记录。
         一旦设置，不能修改。 -->
     <contextName>${CONTEXT_NAME}</contextName>
-    <contextName>${logs}</contextName>
     <!-- <appender>是<configuration>的子节点，是负责写日志的组件。
         有两个必要属性name和class。
         name指定appender名称，
@@ -59,7 +57,7 @@
         level:设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，不能设置为INHERITED或者同义词NULL。默认是DEBUG。
         <root>可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个loger。 -->
     <root>
-        <level value="WARN" />
+        <level value="info" />
         <appender-ref ref="stdout" />
         <appender-ref ref="file" />
     </root>
