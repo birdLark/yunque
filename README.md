@@ -1,5 +1,8 @@
 
 
+[![EN doc](https://img.shields.io/badge/document-English-blue.svg)](README.md)
+[![CN doc](https://img.shields.io/badge/文档-中文版-blue.svg)](README_CH.md)
+
 # 1.鸿鹄的保证
 
 1.现在、未来都不会有商业版本，所有功能全部开源！
@@ -14,7 +17,7 @@
 
 # 3.鸿鹄V1.0的架构
 
-![image-20221110233151606](C:\Users\guoliang\AppData\Roaming\Typora\typora-user-images\image-20221110233151606.png)
+![V1.0的架构图](./picture/a.jpg)
 
 
 
