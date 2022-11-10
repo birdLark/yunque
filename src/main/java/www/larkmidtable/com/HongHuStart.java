@@ -1,5 +1,9 @@
 package www.larkmidtable.com;
 
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,12 +20,19 @@ public class HongHuStart {
 	// 定义日志对象
 	private static Logger logger = LoggerFactory.getLogger(HongHuStart.class);
 	// 程序的入口类
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 
 		logger.info("Hello! 鸿鹄!");
-		// 解析传递的参数
+		// 1.解析传递的参数
+		Options options = new Options();
+		options.addOption("job", true, "Job config.");
+		options.addOption("mode", true, "Job runtime mode.");
+		BasicParser parser = new BasicParser();
+		CommandLine cl = parser.parse(options, args);
+		String jobName = cl.getOptionValue("job");
+		logger.info("传递的参数:{} ",jobName);
 		logger.info("开始迁移任务!");
-		// 线程池多线程提交任务
+		// 2.线程池多线程提交任务
 		ExecutorService executor = Executors.newFixedThreadPool(5);
 		for (int i = 0; i < 10; i++) {
 			executor.submit(() -> {
