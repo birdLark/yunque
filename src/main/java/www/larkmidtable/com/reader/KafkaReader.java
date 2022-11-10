@@ -1,4 +1,4 @@
-package www.larkmditable.com.reader;
+package www.larkmidtable.com.reader;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
