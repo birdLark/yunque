@@ -1,0 +1,28 @@
+<assembly
+        xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id>release</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/bin</directory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/logs</directory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/libs</directory>
+        </fileSet>
+    </fileSets>
+    <files>
+        <file>
+            <source>${project.basedir}/target/honghu-1.0-SNAPSHOT.jar</source>
+            <destName>lib/honghu-v1.0.jar</destName>
+        </file>
+    </files>
+
+</assembly>

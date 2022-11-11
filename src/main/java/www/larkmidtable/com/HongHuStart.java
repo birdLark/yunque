@@ -34,16 +34,16 @@ public class HongHuStart {
 		logger.info("开始迁移任务!");
 		// 2.线程池多线程提交任务
 		ExecutorService executor = Executors.newFixedThreadPool(5);
-		for (int i = 0; i < 10; i++) {
-			executor.submit(() -> {
-				logger.info("任务处理线程ID: " + Thread.currentThread().getId());
-				try {
-					Thread.sleep(1000L);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			});
-		}
+//		for (int i = 0; i < 10; i++) {
+//			executor.submit(() -> {
+//				logger.info("任务处理线程ID: " + Thread.currentThread().getId());
+//				try {
+//					Thread.sleep(1000L);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//			});
+//		}
 
 		logger.info("结束迁移任务!");
 

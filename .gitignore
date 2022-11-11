@@ -1,4 +1,5 @@
 
 .idea/*
 target/*
-logs_IS_UNDEFINED/honghu.log
+logs_IS_UNDEFINED/*
+package/*
