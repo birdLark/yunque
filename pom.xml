@@ -12,6 +12,7 @@
         <module>common</module>
         <module>core</module>
         <module>mysqlreader</module>
+        <module>mysqlwriter</module>
     </modules>
 
     <properties>
