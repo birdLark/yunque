@@ -6,7 +6,13 @@
 
     <groupId>www.larkmidtable.com</groupId>
     <artifactId>honghu</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>common</module>
+        <module>core</module>
+        <module>mysqlreader</module>
+    </modules>
 
     <properties>
         <jdk-version>1.8</jdk-version>
