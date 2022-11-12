@@ -1,0 +1,24 @@
+FROM centos:7.9.2009
+RUN (groupadd -g 3000 honghu)
+RUN (useradd  -g 3000 -u 3000 honghu)
+COPY --chown=3000:3000 docker/test/BuildImages/honghu_profile.sh /etc/profile.d/
+
+USER honghu
+WORKDIR /home/honghu
+RUN ( mkdir bin )
+COPY --chown=3000:3000 docker/test/BuildImages/docker-entrypoint.sh /home/honghu/bin/docker-entrypoint.sh
+RUN ( chmod +x  /home/honghu/bin/docker-entrypoint.sh )
+RUN ( mkdir demo )
+RUN ( mkdir data )
+RUN ( mkdir config )
+
+
+COPY --chown=3000:3000 docker/test/BuildImages/jdk1.8.0_202 /home/honghu/jdk
+
+COPY --chown=3000:3000 target/lib /home/honghu/lib/
+COPY --chown=3000:3000 target/honghu-1.0-SNAPSHOT.jar /home/honghu/
+
+
+ENTRYPOINT ["/home/honghu/bin/docker-entrypoint.sh"]
+
+CMD ["java","-jar", "/home/honghu/honghu-1.0-SNAPSHOT.jar"]
