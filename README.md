@@ -59,7 +59,7 @@ sh start.sh
 
 # 6.联系我们
 
-可以添加官方微信【LarkMidTable2021】,添加时备注【honghu】，可以参与讨论啦！
+可以添加官方微信【**LarkMidTable2021**】,添加时备注【**honghu**】，可以参与讨论啦！
 
 
 
