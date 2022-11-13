@@ -18,6 +18,6 @@ docker run -it  \
 -v /data/honghu/config:/home/honghu/config \
 -v /data/honghu/log:/home/honghu/log \
 -v /data/honghu/data:/home/honghu/data \
---name honghu-test  \ 
+--name honghu-test  \
 -d larkmidtable/honghu:1.0
 ```
