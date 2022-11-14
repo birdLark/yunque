@@ -1,5 +1,8 @@
 package www.larkmidtable.com.writer;
 
+import java.util.List;
+import java.util.Queue;
+
 /**
  *
  *
@@ -7,5 +10,5 @@ package www.larkmidtable.com.writer;
  * @Description:
  **/
 public abstract class Writer {
-	public abstract void startWrite();
+	public abstract void startWrite(Queue<List<String>> queue);
 }

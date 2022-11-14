@@ -4,9 +4,13 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import www.larkmidtable.com.MySQLReader;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import www.larkmidtable.com.MySQLWriter;
+import www.larkmidtable.com.channel.Channel;
+import www.larkmidtable.com.reader.Reader;
+import www.larkmidtable.com.writer.Writer;
+
 
 /**
  *
@@ -20,29 +24,23 @@ public class HongHuStart {
 	// 程序的入口类
 	public static void main(String[] args) throws ParseException {
 
-		logger.info("Hello! 鸿鹄!");
+		logger.info("迁移程序，正式启动中....");
 		// 1.解析传递的参数
 		Options options = new Options();
-		options.addOption("job", true, "Job config.");
-		options.addOption("mode", true, "Job runtime mode.");
+		options.addOption("job", true, "作业配置");
 		BasicParser parser = new BasicParser();
 		CommandLine cl = parser.parse(options, args);
 		String jobName = cl.getOptionValue("job");
-		logger.info("传递的参数:{} ",jobName);
-		logger.info("开始迁移任务!");
-		// 2.线程池多线程提交任务
-		ExecutorService executor = Executors.newFixedThreadPool(5);
-		for (int i = 0; i < 10; i++) {
-			executor.submit(() -> {
-				logger.info("任务处理线程ID: " + Thread.currentThread().getId());
-				try {
-					Thread.sleep(1000L);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			});
-		}
+		logger.info("传递的参数:{} ", jobName);
+		Reader reader = new MySQLReader();
+		Writer writer = new MySQLWriter();
+		Channel channel = new Channel();
+		channel.channel(reader,writer);
 
-		logger.info("结束迁移任务!");
+		// 2.准备Reader(将数据放到channel中)
+//		Reader reader = new MySqLRea
+		// 3.准备Writer(从channel中进行获取数据，写入到目标库)
+
+		logger.info("结束迁移任务....");
 	}
 }
