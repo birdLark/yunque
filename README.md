@@ -21,27 +21,33 @@
 
 
 
-# 2.鸿鹄V1.0的架构
+# 2.架构图
 
 ![V1.0的架构图](./picture/a.jpg)
 
 
 
-# 3.源码编译
+# 3.流程处理图
 
-## 3.1获取代码
+![V1.0的架构图](./picture/b.jpg)
+
+
+
+# 4.源码编译
+
+## 4.1获取代码
 
 ```
 git clone https://gitee.com/LarkMidTable/honghu.git
 ```
 
-## 3.2 编译
+## 4.2 编译
 
 ```
 mvn clean package -DskipTests
 ```
 
-# 4.快速开始
+# 5.快速开始
 
 
 
@@ -49,7 +55,7 @@ sh start.sh
 
 
 
-# 5.开发人员
+# 6.开发人员
 
 **开发人员 ：**【 排名不计先后】
 
@@ -57,7 +63,7 @@ sh start.sh
 
 
 
-# 6.联系我们
+# 7.联系我们
 
 可以添加官方微信【**LarkMidTable2021**】,添加时备注【**honghu**】，可以参与讨论啦！
 
