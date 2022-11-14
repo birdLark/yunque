@@ -10,5 +10,12 @@ import java.util.Queue;
  * @Description:
  **/
 public abstract class Writer {
+	// 初始化操作
+	public abstract void open();
+
+	// 开始写操作
 	public abstract void startWrite(Queue<List<String>> queue);
+
+	// 关闭操作
+	public abstract void close() ;
 }

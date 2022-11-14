@@ -1,5 +1,6 @@
 package www.larkmidtable.com.reader;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -31,7 +32,7 @@ public abstract class Reader {
 	public abstract String[] createInputSplits();
 
 	// 关闭操作
-	public abstract void close();
+	public abstract void close() ;
 
 
 	public void handler() {

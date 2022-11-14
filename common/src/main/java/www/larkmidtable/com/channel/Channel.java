@@ -1,5 +1,7 @@
 package www.larkmidtable.com.channel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.writer.Writer;
 
@@ -13,15 +15,15 @@ import java.util.Queue;
  * @Description:
  **/
 public  class Channel {
-	//
+
+
 	public  void channel(Reader reader, Writer writer){
-		// 读数据
 		reader.open();
-		// 切分SQL
+		writer.open();
 		String[] inputSplits = reader.createInputSplits();
-		// 读取数据
 		Queue<List<String>> records = reader.startRead(inputSplits);
 		writer.startWrite(records);
-
+		reader.close();
+		writer.close();
 	}
 }

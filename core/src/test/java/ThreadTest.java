@@ -24,7 +24,19 @@ public class ThreadTest {
 
 		logger.info("开始迁移任务!");
 
+		// 2.线程池多线程提交任务
+		//		ExecutorService executor = Executors.newFixedThreadPool(inputSplits.length);
 
+		//		for (int i = 0; i < inputSplits.length; i++) {
+		//			executor.submit(() -> {
+		//				records.add("任务处理线程ID: " + Thread.currentThread().getId()+"读取记录");
+		//				try {
+		//					Thread.sleep(1000L);
+		//				} catch (InterruptedException e) {
+		//					e.printStackTrace();
+		//				}
+		//			});
+		//		}
 
 		logger.info("结束迁移任务!");
 	}
