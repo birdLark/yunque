@@ -29,6 +29,7 @@ public class MySQLWriter extends Writer {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager
 					.getConnection("jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC","root","root");
+			connection.setAutoCommit(false);
 			logger.info("MySQL建立连接结束....");
 		} catch (Exception e) {
 			e.printStackTrace();
