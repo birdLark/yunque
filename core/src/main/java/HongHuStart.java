@@ -32,15 +32,13 @@ public class HongHuStart {
 		CommandLine cl = parser.parse(options, args);
 		String jobName = cl.getOptionValue("job");
 		logger.info("传递的参数:{} ", jobName);
+		// 2.创建Reader
 		Reader reader = new MySQLReader();
+		// 3.创建Writer
 		Writer writer = new MySQLWriter();
+		// 4.Channel
 		Channel channel = new Channel();
 		channel.channel(reader,writer);
-
-		// 2.准备Reader(将数据放到channel中)
-//		Reader reader = new MySqLRea
-		// 3.准备Writer(从channel中进行获取数据，写入到目标库)
-
 		logger.info("结束迁移任务....");
 	}
 }

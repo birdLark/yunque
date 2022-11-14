@@ -25,7 +25,7 @@ public abstract class Reader {
 	public abstract void open();
 
 	// 读取数据操作
-	public abstract Queue<List<String>> startRead();
+	public abstract Queue<List<String>> startRead(String[] inputSplits);
 
 	// SQL的切片划分
 	public abstract String[] createInputSplits();
@@ -37,7 +37,6 @@ public abstract class Reader {
 	public void handler() {
 		open();
 		createInputSplits();
-		startRead();
 		close();
 	}
 }

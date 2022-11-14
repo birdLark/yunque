@@ -15,8 +15,12 @@ import java.util.Queue;
 public  class Channel {
 	//
 	public  void channel(Reader reader, Writer writer){
+		// 读数据
 		reader.open();
-		Queue<List<String>> records = reader.startRead();
+		// 切分SQL
+		String[] inputSplits = reader.createInputSplits();
+		// 读取数据
+		Queue<List<String>> records = reader.startRead(inputSplits);
 		writer.startWrite(records);
 
 	}
