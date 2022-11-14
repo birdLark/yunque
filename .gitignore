@@ -6,8 +6,8 @@ package/*
 
 # maven #
 logs
+*/target/*
 target/*
-
 # windows #
 Thumbs.db
 
@@ -17,7 +17,7 @@ Thumbs.db
 # idea #
 .idea
 *.iml
-
+*/*.iml
 # Package Files #
 *.jar
 *.war
