@@ -1,0 +1,8 @@
+# 服务IP
+http.host: "0.0.0.0"
+# ES
+xpack.monitoring.elasticsearch.hosts: [ "http://es-master:9200" ]
+
+xpack.monitoring.enabled: true
+
+xpack.management.enabled: false
