@@ -26,11 +26,11 @@ public class MySQLReader extends Reader {
 	@Override
 	public void open() {
 		try {
-			logger.info("MySQL建立连接开始....");
+			logger.info("MySQL的Reader建立连接开始....");
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager
 					.getConnection("jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC","root","root");
-			logger.info("MySQL建立连接结束....");
+			logger.info("MySQL的Reader建立连接结束....");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -59,18 +59,18 @@ public class MySQLReader extends Reader {
 
 	@Override
 	public String[] createInputSplits() {
-		logger.info("MySQL开始进行分片开始....");
-		logger.info("MySQL开始进行分片结束....");
+		logger.info("MySQL的Reader开始进行分片开始....");
+		logger.info("MySQL的Reader开始进行分片结束....");
 		return new String[5];
 	}
 
 	@Override
 	public void close()  {
 		try {
-			logger.info("MySQL开始进行关闭连接开始....");
+			logger.info("MySQL的Reader开始进行关闭连接开始....");
 			statement.close();
 			connection.close();
-			logger.info("MySQL开始进行关闭连接结束....");
+			logger.info("MySQL的Reader开始进行关闭连接结束....");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

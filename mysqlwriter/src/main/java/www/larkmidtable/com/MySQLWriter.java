@@ -25,12 +25,12 @@ public class MySQLWriter extends Writer {
 	@Override
 	public void open() {
 		try {
-			logger.info("MySQL建立连接开始....");
+			logger.info("MySQL的Writer建立连接开始....");
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager
 					.getConnection("jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC","root","root");
 			connection.setAutoCommit(false);
-			logger.info("MySQL建立连接结束....");
+			logger.info("MySQL的Writer建立连接结束....");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,10 +63,10 @@ public class MySQLWriter extends Writer {
 	@Override
 	public void close() {
 		try {
-			logger.info("MySQL开始进行关闭连接开始....");
+			logger.info("MySQL的Writer开始进行关闭连接开始....");
 			statement.close();
 			connection.close();
-			logger.info("MySQL开始进行关闭连接结束....");
+			logger.info("MySQL的Writer开始进行关闭连接结束....");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
