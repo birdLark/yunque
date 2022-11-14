@@ -26,7 +26,7 @@ public class MySQLWriter extends Writer {
 	public void open() {
 		try {
 			logger.info("MySQL建立连接开始....");
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager
 					.getConnection("jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC","root","root");
 			connection.setAutoCommit(false);
