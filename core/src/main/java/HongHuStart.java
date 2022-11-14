@@ -44,6 +44,5 @@ public class HongHuStart {
 		}
 
 		logger.info("结束迁移任务!");
-
 	}
 }
