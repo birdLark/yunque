@@ -2,6 +2,7 @@ package www.larkmidtable.com;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import www.larkmidtable.com.util.DBType;
 import www.larkmidtable.com.writer.Writer;
 
 import java.sql.Connection;
@@ -26,7 +27,7 @@ public class MySQLWriter extends Writer {
 	public void open() {
 		try {
 			logger.info("MySQL的Writer建立连接开始....");
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName(DBType.MySql.getDriverClass());
 			connection = DriverManager
 					.getConnection("jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC","root","root");
 			connection.setAutoCommit(false);

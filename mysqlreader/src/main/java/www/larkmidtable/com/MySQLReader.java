@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.Reader;
+import www.larkmidtable.com.util.DBType;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class MySQLReader extends Reader {
 	public void open() {
 		try {
 			logger.info("MySQL的Reader建立连接开始....");
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName(DBType.MySql.getDriverClass());
 			connection = DriverManager
 					.getConnection("jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC","root","root");
 			logger.info("MySQL的Reader建立连接结束....");
