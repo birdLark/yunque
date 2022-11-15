@@ -12,6 +12,11 @@ public enum DBType {
 		public String getDriverClass(){//枚举对象实现抽象方法
 			return "com.mysql.jdbc.Driver";
 		}
+	},
+	Oracle{
+		public String getDriverClass(){//枚举对象实现抽象方法
+			return "oracle.jdbc.OracleDriver";
+		}
 	};
 	public abstract String getDriverClass();//定义抽象方法
 
