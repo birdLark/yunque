@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>honghu</artifactId>
+        <groupId>www.larkmidtable.com</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>www.larkmidtable.com</groupId>
+    <artifactId>dmwriter</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>www.larkmidtable.com</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+                   <!-- dm -->
+       		<!-- https://mvnrepository.com/artifact/com.dameng/DmDialect-for-hibernate4.0 -->
+		<dependency>
+			<groupId>com.dameng</groupId>
+			<artifactId>DmDialect-for-hibernate4.0</artifactId>
+			<version>8.1.1.49</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.dameng/Dm7JdbcDriver17 -->
+		<dependency>
+			<groupId>com.dameng</groupId>
+			<artifactId>Dm7JdbcDriver17</artifactId>
+			<version>7.6.0.77</version>
+		</dependency>
+
+ 
+    </dependencies>
+
+</project>
