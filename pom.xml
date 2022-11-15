@@ -15,6 +15,15 @@
         <module>mysqlwriter</module>
         <module>oraclereader</module>
         <module>oraclewriter</module>
+
+        <module>dmreader</module>
+        <module>dmwriter</module>
+
+        <module>sqlserverreader</module>
+		<module>sqlserverwriter</module>
+        <module>elasticsearchwriter</module>
+        <module>elasticsearchreader</module>
+
         <module>doriswriter</module>
     </modules>
 
