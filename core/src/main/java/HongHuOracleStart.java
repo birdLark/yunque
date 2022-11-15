@@ -5,11 +5,12 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import www.larkmidtable.com.MySQLReader;
-
 import www.larkmidtable.com.MySQLWriter;
 import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.Reader;
+import www.larkmidtable.com.reader.oraclereader.OracleReader;
 import www.larkmidtable.com.writer.Writer;
+import www.larkmidtable.com.writer.oraclewriter.OracleWriter;
 
 
 /**
@@ -18,9 +19,9 @@ import www.larkmidtable.com.writer.Writer;
  * @Date: 2022/11/10 14:28
  * @Description:
  **/
-public class HongHuStart {
+public class HongHuOracleStart {
 	// 定义日志对象
-	private static Logger logger = LoggerFactory.getLogger(HongHuStart.class);
+	private static Logger logger = LoggerFactory.getLogger(HongHuOracleStart.class);
 	// 程序的入口类
 	public static void main(String[] args) throws ParseException {
 
@@ -33,9 +34,9 @@ public class HongHuStart {
 		String jobName = cl.getOptionValue("job");
 		logger.info("传递的参数:{} ", jobName);
 		// 2.创建Reader
-		Reader reader = new MySQLReader();
+		Reader reader = new OracleReader();
 		// 3.创建Writer
-		Writer writer = new MySQLWriter();
+		Writer writer = new OracleWriter();
 		// 4.Channel
 		Channel channel = new Channel();
 		channel.channel(reader,writer);
