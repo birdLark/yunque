@@ -15,6 +15,7 @@
         <module>mysqlwriter</module>
         <module>oraclereader</module>
         <module>oraclewriter</module>
+        <module>doriswriter</module>
     </modules>
 
     <properties>
