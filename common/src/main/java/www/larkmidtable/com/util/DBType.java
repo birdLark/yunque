@@ -7,6 +7,11 @@ package www.larkmidtable.com.util;
  * @Description:
  **/
 public enum DBType {
+	DM{
+		public String getDriverClass(){//枚举对象实现抽象方法
+			return "dm.jdbc.driver.DmDriver";
+		}
+	},
 
 	MySql{
 		public String getDriverClass(){//枚举对象实现抽象方法

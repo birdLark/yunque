@@ -4,8 +4,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import www.larkmidtable.com.MySQLReader;
-import www.larkmidtable.com.MySQLWriter;
+
 import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.reader.oraclereader.OracleReader;
