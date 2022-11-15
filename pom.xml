@@ -13,11 +13,27 @@
         <module>core</module>
         <module>mysqlreader</module>
         <module>mysqlwriter</module>
+        <module>oraclereader</module>
+        <module>oraclewriter</module>
+
+        <module>dmreader</module>
+        <module>dmwriter</module>
+
+        <module>sqlserverreader</module>
+		<module>sqlserverwriter</module>
+        <module>elasticsearchwriter</module>
+        <module>elasticsearchreader</module>
+        <module>db2reader</module>
+        <module>db2writer</module>
+
+        <module>doriswriter</module>
     </modules>
 
     <properties>
         <jdk-version>1.8</jdk-version>
         <commons-cli-version>1.2</commons-cli-version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
 
