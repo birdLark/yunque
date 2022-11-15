@@ -26,6 +26,7 @@
         <module>db2reader</module>
         <module>db2writer</module>
 
+        <module>doriswriter</module>
     </modules>
 
     <properties>
