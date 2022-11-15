@@ -23,6 +23,8 @@
 		<module>sqlserverwriter</module>
         <module>elasticsearchwriter</module>
         <module>elasticsearchreader</module>
+        <module>db2reader</module>
+        <module>db2writer</module>
 
     </modules>
 
