@@ -1,5 +1,6 @@
 package www.larkmidtable.com.writer;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Queue;
 
@@ -17,5 +18,5 @@ public abstract class Writer {
 	public abstract void startWrite(Queue<List<String>> queue);
 
 	// 关闭操作
-	public abstract void close() ;
+	public abstract void close() throws IOException;
 }

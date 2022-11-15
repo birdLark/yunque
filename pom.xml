@@ -17,6 +17,8 @@
         <module>oraclewriter</module>
         <module>sqlserverreader</module>
 		<module>sqlserverwriter</module>
+        <module>elasticsearchwriter</module>
+        <module>elasticsearchreader</module>
     </modules>
 
     <properties>
