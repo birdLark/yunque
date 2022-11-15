@@ -1,5 +1,6 @@
 package www.larkmidtable.com.reader;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Queue;
@@ -32,7 +33,7 @@ public abstract class Reader {
 	public abstract String[] createInputSplits();
 
 	// 关闭操作
-	public abstract void close() ;
+	public abstract void close() throws IOException;
 
 
 	public void handler() {
