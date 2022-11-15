@@ -13,6 +13,8 @@
         <module>core</module>
         <module>mysqlreader</module>
         <module>mysqlwriter</module>
+        <module>oraclereader</module>
+        <module>oraclewriter</module>
     </modules>
 
     <properties>
