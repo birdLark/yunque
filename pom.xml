@@ -27,6 +27,9 @@
         <module>db2writer</module>
 
         <module>doriswriter</module>
+        
+        <module>starRocks-reader</module>
+        <module>starRocks-writer</module>
     </modules>
 
     <properties>
