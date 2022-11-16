@@ -1,7 +1,5 @@
 package www.larkmidtable.com.reader;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
