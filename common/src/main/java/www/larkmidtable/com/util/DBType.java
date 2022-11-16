@@ -23,6 +23,11 @@ public enum DBType {
 			return "com.mysql.jdbc.Driver";
 		}
 	},
+	MySql8{
+		public String getDriverClass(){//枚举对象实现抽象方法
+			return "com.mysql.cj.jdbc.Driver";
+		}
+	},
 	Oracle{
 		public String getDriverClass(){//枚举对象实现抽象方法
 			return "oracle.jdbc.OracleDriver";
