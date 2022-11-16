@@ -27,7 +27,7 @@
         <module>db2writer</module>
 
         <module>doriswriter</module>
-        
+
         <module>starRocks-reader</module>
         <module>starRocks-writer</module>
     </modules>
@@ -91,6 +91,14 @@
             <artifactId>commons-cli</artifactId>
             <version>${commons-cli-version}</version>
         </dependency>
+
+        <!--解析yaml-->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.26</version>
+        </dependency>
+
     </dependencies>
     <build>
         <resources>

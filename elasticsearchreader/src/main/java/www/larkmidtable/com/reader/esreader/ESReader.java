@@ -56,9 +56,14 @@ public class ESReader extends Reader {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close()  {
         logger.info("ES 开始关闭....");
-        ESConfig.client.close();
+        try {
+			ESConfig.client.close();
+		}catch (Exception e) {
+        	e.printStackTrace();
+		}
+
     }
 
     private static RestHighLevelClient getClient() {

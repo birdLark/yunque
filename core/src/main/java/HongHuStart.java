@@ -4,12 +4,21 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yaml.snakeyaml.Yaml;
 import www.larkmidtable.com.MySQLReader;
 
 import www.larkmidtable.com.MySQLWriter;
 import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.Reader;
+import www.larkmidtable.com.reader.oraclereader.OracleReader;
 import www.larkmidtable.com.writer.Writer;
+import www.larkmidtable.com.writer.oraclewriter.OracleWriter;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -32,10 +41,39 @@ public class HongHuStart {
 		CommandLine cl = parser.parse(options, args);
 		String jobName = cl.getOptionValue("job");
 		logger.info("传递的参数:{} ", jobName);
+		// 1. 使用流关联yml配置文件
+		BufferedReader br = null;
+		Map<String, String> readerConfig = null;
+		Map<String, String> writerConfig = null;
+		Reader reader = null;
+		Writer writer = null;
+		try {
+			br = new BufferedReader(new FileReader(HongHuStart.class.getClassLoader()
+					.getResource("test.yaml").getPath()));
+			Yaml yaml = new Yaml();
+			Map<String, Map<String,String>> jobMap = (Map<String, Map<String,String>>) yaml.load(br);
+			Set<String> keySet = jobMap.keySet();
+			readerConfig = jobMap.get("reader");
+			writerConfig = jobMap.get("writer");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String readerPlugin = readerConfig.get("plugin");
+		String writerPlugin = writerConfig.get("plugin");
 		// 2.创建Reader
-		Reader reader = new MySQLReader();
+		if("mysqlreader".equals(readerPlugin)) {
+			reader = new MySQLReader();
+		} else if("oraclereader".equals(readerPlugin)) {
+			reader = new OracleReader();
+		}
+
 		// 3.创建Writer
-		Writer writer = new MySQLWriter();
+		if("mysqlwriter".equals(writerPlugin)) {
+			writer = new MySQLWriter();
+		} else if("mysqlwriter".equals(writerPlugin)) {
+			writer = new OracleWriter();
+		}
+
 		// 4.Channel
 		Channel channel = new Channel();
 		channel.channel(reader,writer);

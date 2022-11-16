@@ -33,7 +33,7 @@ public abstract class Reader {
 	public abstract String[] createInputSplits();
 
 	// 关闭操作
-	public abstract void close() throws IOException;
+	public abstract void close() ;
 
 
 	public void handler() {
