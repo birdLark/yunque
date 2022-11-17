@@ -33,6 +33,7 @@
         <module>kafkreader</module>
         <module>kafkawriter</module>
         <module>kafkawriter</module>
+        <module>dorisread</module>
     </modules>
 
     <properties>
