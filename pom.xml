@@ -30,8 +30,7 @@
 
         <module>starRocks-reader</module>
         <module>starRocks-writer</module>
-        <module>kafkreader</module>
-        <module>kafkawriter</module>
+        <module>kafkareader</module>
         <module>kafkawriter</module>
         <module>dorisread</module>
     </modules>
