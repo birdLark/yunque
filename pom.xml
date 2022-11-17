@@ -33,6 +33,8 @@
         <module>kafkareader</module>
         <module>kafkawriter</module>
         <module>dorisread</module>
+        <module>kingbasereader</module>
+        <module>kingbasewriter</module>
     </modules>
 
     <properties>
