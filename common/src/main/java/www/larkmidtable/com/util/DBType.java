@@ -38,6 +38,11 @@ public enum DBType {
 			return "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 		}
 	},
+	KingBase8{
+		public String getDriverClass(){//枚举对象实现抽象方法
+			return "com.kingbase8.Driver";
+		}
+	},
 	;
 	public abstract String getDriverClass();//定义抽象方法
 

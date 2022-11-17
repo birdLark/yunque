@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>kafkreader</artifactId>
 
-  <name>kafkreader</name>
+  <name>kafkareader</name>
   <parent>
     <artifactId>honghu</artifactId>
     <groupId>www.larkmidtable.com</groupId>

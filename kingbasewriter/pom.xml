@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>honghu</artifactId>
+        <groupId>www.larkmidtable.com</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>www.larkmidtable.com</groupId>
+    <artifactId>kingbasewriter</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>www.larkmidtable.com</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--   maven仓库未提供官方人大金仓依赖，进入本项目lib目录下执行以下命令安装到本地仓库
+        mvn install:install-file -Dfile=kingbase8-8.6.0.jar
+        -DgroupId=com.kingbase8 -DartifactId=kingbase8-jdbc-driver
+         -Dversion=8.6.0 -Dpackaging=jar  -->
+        <dependency>
+            <groupId>com.kingbase8</groupId>
+            <artifactId>kingbase8-jdbc-driver</artifactId>
+            <version>8.6.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/kingbase8-8.6.0.jar</systemPath>
+        </dependency>
+    </dependencies>
+    <!--打包时将本地金仓依赖jar包打进去-->
+    <build>
+        <resources>
+            <resource>
+                <directory>lib</directory>
+                <targetPath>/BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+</project>
