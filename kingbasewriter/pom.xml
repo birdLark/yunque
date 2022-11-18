@@ -35,7 +35,7 @@
             <artifactId>kingbase8-jdbc-driver</artifactId>
             <version>8.6.0</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}/lib/kingbase8-8.6.0.jar</systemPath>
+            <systemPath>${pom.basedir}/file/kingbase8-8.6.0.jar</systemPath>
         </dependency>
     </dependencies>
     <!--打包时将本地金仓依赖jar包打进去-->

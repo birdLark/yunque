@@ -14,7 +14,7 @@ import java.util.Queue;
  * @package: www.larkmidtable.com
  * @className: KingBaseReader
  * @author: qd.liu
- * @description: 人大金仓读组件
+ * @description: 人大金仓写组件
  * @date: 2022/11/17 22:09
  * @version: 1.0
  */
