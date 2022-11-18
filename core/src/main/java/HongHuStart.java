@@ -62,19 +62,6 @@ public class HongHuStart {
 		}
 		String readerPlugin = readerConfig.get("plugin");
 		String writerPlugin = writerConfig.get("plugin");
-//		// 2.创建Reader
-//		if("mysqlreader".equals(readerPlugin)) {
-//			reader = new MySQLReader();
-//		} else if("oraclereader".equals(readerPlugin)) {
-//			reader = new OracleReader();
-//		}
-//
-//		// 3.创建Writer
-//		if("mysqlwriter".equals(writerPlugin)) {
-//			writer = new MySQLWriter();
-//		} else if("mysqlwriter".equals(writerPlugin)) {
-//			writer = new OracleWriter();
-//		}
 		try {
 			reader = getReaderPlugin(readerPlugin);
 			writer = getWriterPlugin(writerPlugin);
