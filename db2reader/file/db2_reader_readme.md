@@ -2,12 +2,12 @@
 
 ```
 writer:
-  plugin: "mysqlwriter"
-  url: "jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC"
-  username: "root"
-  password: "root"
-  table: "student"
-  column: "id,name"
+  plugin: "db2reader"
+  url: "jdbc:db2://192.168.2.8:50000/sample"
+  username: "db2admin"
+  password: "db2admin"
+  table: "GOOCH.ACT"
+  column: "ACTNO,ACTKWD"
 ```
 
 # 2.参数的说明
@@ -20,6 +20,7 @@ writer:
 | password | 密码           |
 | table    | 读取的表       |
 | column   | 读取的列       |
+
 
 
 # 3.依赖的JAR包的位置

@@ -1,6 +1,6 @@
 # 1.配置文件的配置
 
-`
+```
 writer:
   plugin: "mysqlreader"
   url: "jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC"
@@ -8,7 +8,7 @@ writer:
   password: "root"
   table: "student"
   column: "id,name"
-`
+```
 
 # 2.参数的说明
 

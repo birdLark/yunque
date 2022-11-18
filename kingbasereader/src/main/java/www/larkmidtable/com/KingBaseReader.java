@@ -28,7 +28,7 @@ public class KingBaseReader extends Reader {
     public void open() {
         try {
             logger.info("KingBase的Reader建立连接开始....");
-            Class.forName(DBType.DM.getDriverClass());
+            Class.forName(DBType.KingBase8.getDriverClass());
             connection = DriverManager
                     .getConnection("jdbc:kingbase8://127.0.0.1:54321/test", "system", "123456");
             logger.info("KingBase的Reader建立连接结束....");

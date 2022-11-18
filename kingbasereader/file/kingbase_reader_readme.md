@@ -1,14 +1,14 @@
 # 1.配置文件的配置
 
-```
+`
 writer:
-  plugin: "mysqlwriter"
-  url: "jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC"
+  plugin: "kingbasereader"
+  url: "jdbc:kingbase8://127.0.0.1:54321/test"
   username: "root"
   password: "root"
   table: "student"
   column: "id,name"
-```
+`
 
 # 2.参数的说明
 
@@ -20,6 +20,7 @@ writer:
 | password | 密码           |
 | table    | 读取的表       |
 | column   | 读取的列       |
+
 
 
 # 3.依赖的JAR包的位置
