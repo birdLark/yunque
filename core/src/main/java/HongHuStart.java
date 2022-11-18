@@ -88,6 +88,7 @@ public class HongHuStart {
 		logger.info("结束迁移任务....");
 	}
 
+
 	private static Writer getWriterPlugin(String name) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		return (Writer) Class.forName(WriterPluginEnum.getByName(name).getClassPath()).newInstance();
 	}

@@ -4,6 +4,7 @@ import java.util.stream.Stream;
 
 public enum WriterPluginEnum {
     //TODO 需补充插件种类
+
     MYSQLWRITER("mysqlwriter","www.larkmidtable.com.MySQLWriter"),
     ORACLEWRITER("oraclewriter","ww.larkmidtable.com.writer.oraclewriter.OracleWriter");
     private String name;

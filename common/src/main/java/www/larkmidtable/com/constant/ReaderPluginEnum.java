@@ -8,6 +8,7 @@ import java.util.stream.Stream;
  */
 public enum ReaderPluginEnum {
     //TODO 需补充插件种类
+
     MYSQLREADER("mysqlreader","www.larkmidtable.com.MySQLReader"),
     ORACLEREADER("oraclelreader","www.larkmidtable.com.reader.oraclereader.OracleReader");
     private String name;
