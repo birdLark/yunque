@@ -89,7 +89,7 @@ public class HongHuStart {
 	}
 
 	private static Writer getWriterPlugin(String name) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		return (Writer) Class.forName(WriterPluginEnum.valueOf(name).getClassPath()).newInstance();
+		return (Writer) Class.forName(WriterPluginEnum.getByName(name).getClassPath()).newInstance();
 	}
 
 	private static Reader getReaderPlugin(String name) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
