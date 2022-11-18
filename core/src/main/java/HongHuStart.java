@@ -9,6 +9,8 @@ import www.larkmidtable.com.MySQLReader;
 
 import www.larkmidtable.com.MySQLWriter;
 import www.larkmidtable.com.channel.Channel;
+import www.larkmidtable.com.constant.ReaderPluginEnum;
+import www.larkmidtable.com.constant.WriterPluginEnum;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.reader.oraclereader.OracleReader;
 import www.larkmidtable.com.writer.Writer;
@@ -60,23 +62,37 @@ public class HongHuStart {
 		}
 		String readerPlugin = readerConfig.get("plugin");
 		String writerPlugin = writerConfig.get("plugin");
-		// 2.创建Reader
-		if("mysqlreader".equals(readerPlugin)) {
-			reader = new MySQLReader();
-		} else if("oraclereader".equals(readerPlugin)) {
-			reader = new OracleReader();
-		}
-
-		// 3.创建Writer
-		if("mysqlwriter".equals(writerPlugin)) {
-			writer = new MySQLWriter();
-		} else if("mysqlwriter".equals(writerPlugin)) {
-			writer = new OracleWriter();
+//		// 2.创建Reader
+//		if("mysqlreader".equals(readerPlugin)) {
+//			reader = new MySQLReader();
+//		} else if("oraclereader".equals(readerPlugin)) {
+//			reader = new OracleReader();
+//		}
+//
+//		// 3.创建Writer
+//		if("mysqlwriter".equals(writerPlugin)) {
+//			writer = new MySQLWriter();
+//		} else if("mysqlwriter".equals(writerPlugin)) {
+//			writer = new OracleWriter();
+//		}
+		try {
+			reader = getReaderPlugin(readerPlugin);
+			writer = getWriterPlugin(writerPlugin);
+		} catch (Exception e) {
+			logger.error("获取插件失败：",e);
 		}
 
 		// 4.Channel
 		Channel channel = new Channel();
 		channel.channel(reader,writer);
 		logger.info("结束迁移任务....");
+	}
+
+	private static Writer getWriterPlugin(String name) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		return (Writer) Class.forName(WriterPluginEnum.valueOf(name).getClassPath()).newInstance();
+	}
+
+	private static Reader getReaderPlugin(String name) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		return (Reader) Class.forName(ReaderPluginEnum.getByName(name).getClassPath()).newInstance();
 	}
 }
