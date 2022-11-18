@@ -2,6 +2,7 @@ package www.larkmidtable.com.reader.sqlserverreader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.util.DBType;
 import www.larkmidtable.com.util.DBUtil;
@@ -51,12 +52,12 @@ public class SqlServerReader extends Reader {
                 String name = resultSet.getString("name");
                 records.add(name);
             }
-            getQueue().add(records);
+			Channel.getQueue().add(records);
         }catch (Exception e){
             e.printStackTrace();
         }
         logger.info("SqlServer读取数据结束....");
-        return getQueue();
+        return Channel.getQueue();
     }
 
     @Override

@@ -36,7 +36,7 @@ public class HdfsWriterTest {
         data.add("2,1,小东,乒乓球,兴趣广泛");
         data.add("3,2,小红,唱歌,是个唱歌能手");
         queue.add(data);
-        hdfsWriter.startWrite(queue);
+        hdfsWriter.startWrite();
         hdfsWriter.close();
     }
 

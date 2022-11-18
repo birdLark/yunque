@@ -2,6 +2,7 @@ package www.larkmidtable.com.writer.oraclewriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.util.DBType;
 import www.larkmidtable.com.util.DBUtil;
 import www.larkmidtable.com.writer.Writer;
@@ -38,9 +39,9 @@ public class OracleWriter extends Writer {
     }
 
     @Override
-    public void startWrite(Queue<List<String>> queue) {
+    public void startWrite() {
         logger.info("Oracle开始写数据....");
-        List<String> poll = queue.poll();
+        List<String> poll = Channel.getQueue().poll();
         String sql = "insert into student(id,name) values (?,?)";
         try {
             // 批量插入时ps对象必须放到for循环外面

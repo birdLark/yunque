@@ -12,6 +12,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.writer.Writer;
 
 import java.io.IOException;
@@ -78,7 +79,7 @@ public class DorisWriter extends Writer {
         }
         queue.add(strings);
         dorisWriter.open();
-        dorisWriter.startWrite(queue);
+        dorisWriter.startWrite();
     }
 
     @Override
@@ -103,10 +104,10 @@ public class DorisWriter extends Writer {
     }
 
     @Override
-    public void startWrite(Queue<List<String>> queue) {
+    public void startWrite() {
         logger.info("Doris开始写数据....");
         //整合数据
-        String content = getDorisData(queue);
+        String content = getDorisData(Channel.getQueue());
         //发送数据
         sendDorisDatas(content);
         logger.info("Doris写数据完成....");

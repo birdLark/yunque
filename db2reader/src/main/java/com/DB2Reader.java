@@ -2,6 +2,7 @@ package com;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.util.DBType;
 
@@ -52,12 +53,12 @@ public class DB2Reader extends Reader {
                 System.out.println(actkwd);
                 records.add(empno);
             }
-            getQueue().add(records);
+			Channel.getQueue().add(records);
         } catch (Exception e) {
             e.printStackTrace();
         }
         logger.info("DB2读取数据结束....");
-        return getQueue();
+        return Channel.getQueue();
     }
 
 

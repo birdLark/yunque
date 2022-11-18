@@ -4,6 +4,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.Reader;
 
 import java.io.IOException;
@@ -49,11 +50,11 @@ public class HdfsReader extends Reader{
                 String read = new String(buffer, Charset.forName("UTF-8"));
                 data.add(read);
             }
-            getQueue().add(data);
+			Channel.getQueue().add(data);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return getQueue();
+        return Channel.getQueue();
     }
 
 

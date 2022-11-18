@@ -14,15 +14,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @Description:
  **/
 public abstract class Reader {
-	private Queue<List<String>> queue = new LinkedBlockingQueue<List<String>>();
 
-	public Queue<List<String>> getQueue() {
-		return queue;
-	}
 
-	public void setQueue(Queue<List<String>> queue) {
-		this.queue = queue;
-	}
+
 
 	// 初始化操作
 	public abstract void open();
