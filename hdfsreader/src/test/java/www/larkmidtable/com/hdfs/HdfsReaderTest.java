@@ -2,7 +2,6 @@ package www.larkmidtable.com.hdfs;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
