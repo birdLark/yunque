@@ -42,6 +42,8 @@
         <module>kingbasewriter</module>
         <module>hdfs-reader</module>
         <module>hdfs-writer</module>
+        <module>pgwriter</module>
+        <module>pgreader</module>
     </modules>
 
     <properties>
