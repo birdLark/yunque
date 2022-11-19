@@ -3,6 +3,7 @@ package www.larkmidtable.com;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.util.DBType;
 
@@ -26,8 +27,8 @@ public class StartRockerReader extends Reader {
 	private Connection connection ;
 	private PreparedStatement statement ;
 	private static Logger logger = LoggerFactory.getLogger(StartRockerReader.class);
-	
-	
+
+
 	public static void main(String[] args) {
 		StartRockerReader r = new StartRockerReader();
 		r.open();
@@ -36,9 +37,9 @@ public class StartRockerReader extends Reader {
 		for(String n : l) {
 			System.out.println(n);
 		}
-		
+
 	}
-	
+
 	@Override
 	public void open() {
 		try {
@@ -64,12 +65,12 @@ public class StartRockerReader extends Reader {
 				String name = resultSet.getString("username");
 				records.add(name);
 			}
-			getQueue().add(records);
+			Channel.getQueue().add(records);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
 		logger.info("starrocks读取数据结束....");
-		return getQueue();
+		return Channel.getQueue();
 	}
 
 

@@ -49,12 +49,12 @@ public class DMReader extends Reader {
 				String name = resultSet.getString("name");
 				records.add(name);
 			}
-			getQueue().add(records);
+			Channel.getQueue().add(records);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
 		logger.info("DM读取数据结束....");
-		return getQueue();
+		return Channel.getQueue();
 	}
 
 

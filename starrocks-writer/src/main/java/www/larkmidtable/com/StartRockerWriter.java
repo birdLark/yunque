@@ -2,6 +2,7 @@ package www.larkmidtable.com;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.util.DBType;
 import www.larkmidtable.com.writer.Writer;
 
@@ -25,8 +26,8 @@ public class StartRockerWriter extends Writer {
 	private Connection connection ;
 	private PreparedStatement statement ;
 	private static Logger logger = LoggerFactory.getLogger(StartRockerWriter.class);
-	
-	
+
+
 	public static void main(String[] args) {
 		StartRockerWriter r = new StartRockerWriter();
 		r.open();
@@ -39,9 +40,9 @@ public class StartRockerWriter extends Writer {
 		poll.add("shenzheng ");
 		Queue<List<String>> queue = new LinkedList<List<String>>();
 		queue.add(poll);
-		r.startWrite(queue);
+		r.startWrite();
 	}
-	
+
 	@Override
 	public void open() {
 		try {
@@ -57,9 +58,9 @@ public class StartRockerWriter extends Writer {
 	}
 
 	@Override
-	public void startWrite(Queue<List<String>> queue) {
+	public void startWrite() {
 		logger.info("开始写数据....");
-		List<String> poll = queue.poll();
+		List<String> poll = Channel.getQueue().poll();
 		String sql = "insert into table1(siteid,citycode,username,pv) values (?,?,?,?)";
 		try {
 			statement = connection.prepareStatement(sql); // 批量插入时ps对象必须放到for循环外面

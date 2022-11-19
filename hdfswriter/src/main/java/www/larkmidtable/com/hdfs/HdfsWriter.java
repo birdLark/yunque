@@ -3,6 +3,7 @@ package www.larkmidtable.com.hdfs;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.writer.Writer;
 
 import java.io.DataOutputStream;
@@ -35,8 +36,8 @@ public class HdfsWriter extends Writer {
     }
 
     @Override
-    public void startWrite(Queue<List<String>> queue) {
-        List<String> poll = queue.poll();
+    public void startWrite() {
+        List<String> poll = Channel.getQueue().poll();
         Path destPath = new Path(writePath);
         Path finalPath = new Path(fs.makeQualified(destPath).toUri());
         try {

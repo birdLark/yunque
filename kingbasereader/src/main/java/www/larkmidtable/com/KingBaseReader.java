@@ -2,6 +2,7 @@ package www.larkmidtable.com;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.util.DBType;
 
@@ -28,7 +29,7 @@ public class KingBaseReader extends Reader {
     public void open() {
         try {
             logger.info("KingBase的Reader建立连接开始....");
-            Class.forName(DBType.DM.getDriverClass());
+            Class.forName(DBType.KingBase8.getDriverClass());
             connection = DriverManager
                     .getConnection("jdbc:kingbase8://127.0.0.1:54321/test", "system", "123456");
             logger.info("KingBase的Reader建立连接结束....");
@@ -49,12 +50,12 @@ public class KingBaseReader extends Reader {
                 String name = resultSet.getString("name");
                 records.add(name);
             }
-            getQueue().add(records);
+			Channel.getQueue().add(records);
         } catch (Exception e) {
             e.printStackTrace();
         }
         logger.info("KingBase读取数据结束....");
-        return getQueue();
+        return Channel.getQueue();
     }
 
 

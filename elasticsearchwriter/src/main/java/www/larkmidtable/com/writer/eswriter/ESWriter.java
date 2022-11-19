@@ -6,6 +6,7 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.writer.Writer;
 
 import java.io.IOException;
@@ -31,9 +32,9 @@ public class ESWriter extends Writer {
 
 
     @Override
-    public void startWrite(Queue<List<String>> queue) {
+    public void startWrite() {
         logger.info("ES开始写数据....");
-        List<String> poll = queue.poll();
+        List<String> poll = Channel.getQueue().poll();
         String index = null;
 
         for (int i = 0; i < poll.size(); i++) {

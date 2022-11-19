@@ -40,9 +40,10 @@
 
         <module>kingbasereader</module>
         <module>kingbasewriter</module>
-
         <module>hdfsreader</module>
         <module>hdfswriter</module>
+        <module>pgwriter</module>
+        <module>pgreader</module>
     </modules>
 
     <properties>
