@@ -40,13 +40,14 @@ public class HongHuStart {
 		logger.info("读取作业配置文件....");
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(
-					new FileReader(HongHuStart.class.getClassLoader().getResource("test.yaml").getPath()));
+			br = new BufferedReader(new FileReader(HongHuStart.class. //
+					getClassLoader().getResource("test.yaml").getPath()));
 		} catch (FileNotFoundException e) {
 			throw new HongHuException("文件获取不到", e);
 		}
 		Yaml yaml = new Yaml();
-		Map<String, Map<String, String>> jobMap = (Map<String, Map<String, String>>) yaml.load(br);
+		Map<String, Map<String, String>> jobMap = //
+				(Map<String, Map<String, String>>) yaml.load(br);
 
 		logger.info("解析配置文件....");
 		Map<String, String> readerConfig = jobMap.get(ConfigConstant.READER);
@@ -63,7 +64,6 @@ public class HongHuStart {
 		Channel channel = new Channel();
 		channel.channel(reader, writer);
 		logger.info("结束迁移任务....");
+
 	}
-
-
 }

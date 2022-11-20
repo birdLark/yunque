@@ -30,7 +30,8 @@ public class MySQLReader extends Reader {
 			logger.info("MySQL的Reader建立连接开始....");
 			Class.forName(DBType.MySql.getDriverClass());
 			connection = DriverManager
-					.getConnection("jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC","root","root");
+					.getConnection("jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC",
+							"root","root");
 			logger.info("MySQL的Reader建立连接结束....");
 		} catch (Exception e) {
 			e.printStackTrace();
