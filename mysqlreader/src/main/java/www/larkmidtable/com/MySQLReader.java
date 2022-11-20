@@ -24,14 +24,15 @@ public class MySQLReader extends Reader {
 	private Connection connection ;
 	private PreparedStatement statement ;
 	private static Logger logger = LoggerFactory.getLogger(MySQLReader.class);
+
+
 	@Override
 	public void open() {
 		try {
 			logger.info("MySQL的Reader建立连接开始....");
 			Class.forName(DBType.MySql.getDriverClass());
 			connection = DriverManager
-					.getConnection("jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC",
-							"root","root");
+					.getConnection(configBean.getUrl(),configBean.getUsername(),configBean.getPassword());
 			logger.info("MySQL的Reader建立连接结束....");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -43,11 +44,11 @@ public class MySQLReader extends Reader {
 		logger.info("MySQL读取数据操作....");
 		try {
 			List<String> records =  new ArrayList<>();
-			String sql = "select * from student";
+			String sql = String.format("select * from %s",configBean.getTable());
 			statement = connection.prepareCall(sql);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				String name = resultSet.getString("name");
+				String name = resultSet.getString(configBean.getColumn());
 				records.add(name);
 			}
 			Channel.getQueue().add(records);

@@ -3,6 +3,7 @@ package www.larkmidtable.com.constant;
 import java.util.stream.Stream;
 
 public enum WriterPluginEnum {
+
     MYSQLWRITER("mysqlwriter","www.larkmidtable.com.MySQLWriter"),
     ORACLEWRITER("oraclewriter","ww.larkmidtable.com.writer.oraclewriter.OracleWriter");
     private String name;

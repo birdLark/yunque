@@ -29,8 +29,7 @@ public class MySQLWriter extends Writer {
 		try {
 			logger.info("MySQL的Writer建立连接开始....");
 			Class.forName(DBType.MySql.getDriverClass());
-			connection = DriverManager
-					.getConnection("jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC","root","root");
+			connection = DriverManager.getConnection(configBean.getUrl(),configBean.getUsername(),configBean.getPassword());
 			connection.setAutoCommit(false);
 			logger.info("MySQL的Writer建立连接结束....");
 		} catch (Exception e) {
@@ -42,7 +41,7 @@ public class MySQLWriter extends Writer {
 	public void startWrite() {
 		logger.info("开始写数据....");
 		List<String> poll = Channel.getQueue().poll();
-		String sql = "insert into student(id,name) values (?,?)";
+		String sql = String.format("insert into %s(%s) values (?,?)",configBean.getTable(),configBean.getColumn());
 		try {
 			statement = connection.prepareStatement(sql); // 批量插入时ps对象必须放到for循环外面
 			for (int i = 0; i < poll.size(); i++) {
