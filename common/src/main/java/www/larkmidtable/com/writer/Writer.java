@@ -15,9 +15,23 @@ import java.util.Queue;
  * @Description:
  **/
 public abstract class Writer {
-	public static Writer getWriterPlugin(String name, ConfigBean readerConfigBean) {
+
+	protected ConfigBean configBean;
+
+	public ConfigBean getConfigBean() {
+		return configBean;
+	}
+
+	public void setConfigBean(ConfigBean configBean) {
+		this.configBean = configBean;
+	}
+
+	public static Writer getWriterPlugin(String name, ConfigBean writerConfigBean) {
 		try {
-			return (Writer) Class.forName(WriterPluginEnum.getByName(name).getClassPath()).newInstance();
+			Writer writer = (Writer) Class.forName(WriterPluginEnum.getByName(name).getClassPath()).newInstance();
+			writer.setConfigBean(writerConfigBean);
+			writer.getClass();
+			return writer;
 		} catch (Exception e) {
 			throw new HongHuException("文件获取不到", e);
 		}

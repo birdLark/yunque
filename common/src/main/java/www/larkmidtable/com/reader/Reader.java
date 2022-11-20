@@ -17,7 +17,15 @@ import java.util.concurrent.LinkedBlockingQueue;
 public abstract class Reader {
 
 
+	protected ConfigBean configBean;
 
+	public ConfigBean getConfigBean() {
+		return configBean;
+	}
+
+	public void setConfigBean(ConfigBean configBean) {
+		this.configBean = configBean;
+	}
 
 	// 初始化操作
 	public abstract void open();
@@ -34,7 +42,9 @@ public abstract class Reader {
 
 	public static Reader getReaderPlugin(String name, ConfigBean readerConfigBean) {
 		try {
-			return (Reader) Class.forName(ReaderPluginEnum.getByName(name).getClassPath()).newInstance();
+			Reader reader = (Reader) Class.forName(ReaderPluginEnum.getByName(readerConfigBean.getPlugin()).getClassPath()).newInstance();
+			reader.setConfigBean(readerConfigBean);
+			return reader;
 		} catch (Exception e) {
 			throw new HongHuException("文件获取不到", e);
 		}
