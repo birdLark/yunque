@@ -1,5 +1,6 @@
 package www.larkmidtable.com.writer;
 
+import www.larkmidtable.com.bean.ConfigBean;
 import www.larkmidtable.com.constant.WriterPluginEnum;
 import www.larkmidtable.com.exception.HongHuException;
 
@@ -14,7 +15,7 @@ import java.util.Queue;
  * @Description:
  **/
 public abstract class Writer {
-	public static Writer getWriterPlugin(String name) {
+	public static Writer getWriterPlugin(String name, ConfigBean readerConfigBean) {
 		try {
 			return (Writer) Class.forName(WriterPluginEnum.getByName(name).getClassPath()).newInstance();
 		} catch (Exception e) {

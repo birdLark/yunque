@@ -113,6 +113,20 @@
             <version>1.26</version>
         </dependency>
 
+        <!--Map转换为实体类-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.54</version>
+        </dependency>
+
+        <!--避免使用实体类-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+        </dependency>
+
     </dependencies>
     <build>
         <resources>

@@ -1,5 +1,7 @@
 package com.larkmidtable.honghu;
 
+import com.alibaba.fastjson.JSON;
+import com.larkmidtable.honghu.config.ConfigConstant;
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
@@ -7,6 +9,7 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
+import www.larkmidtable.com.bean.ConfigBean;
 import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.exception.HongHuException;
 import www.larkmidtable.com.reader.Reader;
@@ -52,13 +55,15 @@ public class HongHuStart {
 		logger.info("解析配置文件....");
 		Map<String, String> readerConfig = jobMap.get(ConfigConstant.READER);
 		Map<String, String> writerConfig = jobMap.get(ConfigConstant.WRITER);
+		ConfigBean readerConfigBean = JSON.parseObject(JSON.toJSONString(readerConfig), ConfigBean.class);
+		ConfigBean writerConfigBean = JSON.parseObject(JSON.toJSONString(writerConfig), ConfigBean.class);
 
 		String readerPlugin = readerConfig.get(ConfigConstant.READER_PLUGIN);
 		String writerPlugin = writerConfig.get(ConfigConstant.WRITER_PLUGIN);
 
 		logger.info("获取Reader和Writer....");
-		Reader reader = Reader.getReaderPlugin(readerPlugin);
-		Writer writer = Writer.getWriterPlugin(writerPlugin);
+		Reader reader = Reader.getReaderPlugin(readerPlugin,readerConfigBean);
+		Writer writer = Writer.getWriterPlugin(writerPlugin,writerConfigBean);
 
 		logger.info("进行读写任务....");
 		Channel channel = new Channel();

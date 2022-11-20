@@ -1,5 +1,6 @@
 package www.larkmidtable.com.reader;
 
+import www.larkmidtable.com.bean.ConfigBean;
 import www.larkmidtable.com.constant.ReaderPluginEnum;
 import www.larkmidtable.com.exception.HongHuException;
 
@@ -31,7 +32,7 @@ public abstract class Reader {
 	public abstract void close() ;
 
 
-	public static Reader getReaderPlugin(String name) {
+	public static Reader getReaderPlugin(String name, ConfigBean readerConfigBean) {
 		try {
 			return (Reader) Class.forName(ReaderPluginEnum.getByName(name).getClassPath()).newInstance();
 		} catch (Exception e) {
