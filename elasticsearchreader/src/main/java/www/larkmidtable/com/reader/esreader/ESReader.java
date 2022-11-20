@@ -5,6 +5,7 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.Reader;
 
 import java.io.IOException;
@@ -42,9 +43,9 @@ public class ESReader extends Reader {
             logger.error("ES读取数据 error:", var8);
         }
 
-        getQueue().add(records);
+		Channel.getQueue().add(records);
 
-        return getQueue();
+        return Channel.getQueue();
     }
 
 

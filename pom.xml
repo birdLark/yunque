@@ -40,8 +40,10 @@
 
         <module>kingbasereader</module>
         <module>kingbasewriter</module>
-        <module>hdfs-reader</module>
-        <module>hdfs-writer</module>
+        <module>hdfsreader</module>
+        <module>hdfswriter</module>
+        <module>pgwriter</module>
+        <module>pgreader</module>
     </modules>
 
     <properties>
@@ -109,6 +111,20 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>1.26</version>
+        </dependency>
+
+        <!--Map转换为实体类-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.54</version>
+        </dependency>
+
+        <!--避免使用实体类-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
         </dependency>
 
     </dependencies>

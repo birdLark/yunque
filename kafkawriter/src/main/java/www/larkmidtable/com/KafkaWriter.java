@@ -18,7 +18,7 @@ public class KafkaWriter extends Writer
     }
 
     @Override
-    public void startWrite(Queue<List<String>> queue) {
+    public void startWrite() {
 
     }
 

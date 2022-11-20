@@ -1,5 +1,9 @@
 package www.larkmidtable.com.reader;
 
+import www.larkmidtable.com.bean.ConfigBean;
+import www.larkmidtable.com.constant.ReaderPluginEnum;
+import www.larkmidtable.com.exception.HongHuException;
+
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -11,15 +15,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @Description:
  **/
 public abstract class Reader {
-	private Queue<List<String>> queue = new LinkedBlockingQueue<List<String>>();
 
-	public Queue<List<String>> getQueue() {
-		return queue;
-	}
 
-	public void setQueue(Queue<List<String>> queue) {
-		this.queue = queue;
-	}
+
 
 	// 初始化操作
 	public abstract void open();
@@ -34,9 +32,12 @@ public abstract class Reader {
 	public abstract void close() ;
 
 
-	public void handler() {
-		open();
-		createInputSplits();
-		close();
+	public static Reader getReaderPlugin(String name, ConfigBean readerConfigBean) {
+		try {
+			return (Reader) Class.forName(ReaderPluginEnum.getByName(name).getClassPath()).newInstance();
+		} catch (Exception e) {
+			throw new HongHuException("文件获取不到", e);
+		}
+
 	}
 }
