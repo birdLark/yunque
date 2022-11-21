@@ -4,7 +4,7 @@ reader:
   username: "root"
   password: "root"
   table: "student"
-  column: "id,name"
+  column: "id,name,address"
   thread: "1"
 
 writer:
@@ -12,5 +12,5 @@ writer:
   url: "jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC"
   username: "root"
   password: "root"
-  table: "student2"
-  column: "id,name"
+  table: "student_1"
+  column: "id,name,address"
