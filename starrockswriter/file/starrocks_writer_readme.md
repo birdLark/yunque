@@ -2,7 +2,7 @@
 
 ```
 writer:
-  plugin: "starrocksreader"
+  plugin: "starrockswrite"
   url: "jdbc:mysql://10.28.60.132:9030/example_db?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC"
   username: "root"
   password: "root"
