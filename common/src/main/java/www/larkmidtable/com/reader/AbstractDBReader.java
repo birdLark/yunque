@@ -1,12 +1,16 @@
 package www.larkmidtable.com.reader;
 
+import com.alibaba.fastjson.JSONObject;
 import www.larkmidtable.com.channel.Channel;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 public abstract class AbstractDBReader extends Reader {
@@ -64,13 +68,17 @@ public abstract class AbstractDBReader extends Reader {
         CallableStatement callableStatement = connection.prepareCall(inputSplit);
         ResultSet resultSet = callableStatement.executeQuery();
         while (resultSet.next()) {
-            String name = resultSet.getString(configBean.getColumn());
-            records.add(name);
+        	Map<String ,Object> map = new HashMap<>();
+			ResultSetMetaData metaData = resultSet.getMetaData();
+			for(int i =1;i<=metaData.getColumnCount();i++) {
+				map.put(metaData.getColumnName(i),resultSet.getObject(metaData.getColumnName(i)));
+			}
+            records.add(JSONObject.toJSONString(map));
         }
         Channel.getQueue().add(records);
     }
 
-    public List<String> defaultInputSplits(String originInput) {
+    public List<String> defaultInputSplits(String column,String originInput) {
         List<String> splits = new ArrayList<>();
         int count = count();
         if (count > 0 && 1 == 1) {// 1==1 后续可开启切分SQL配置参数
@@ -81,7 +89,7 @@ public abstract class AbstractDBReader extends Reader {
                 size = size + 1;
             }
             for (int i = 0; i < size; i++) {
-                StringBuilder builder = new StringBuilder("SELECT * FROM ( ");
+                StringBuilder builder = new StringBuilder("SELECT "+column+" FROM ( ");
                 builder.append(" ").append(originInput).append(" ) t").append(" ").append("LIMIT");
                 int limitStart = i * DEFAULT_BATCH_SIZE;
                 int j = i + 1;
