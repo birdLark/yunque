@@ -55,8 +55,8 @@ public class MySQLReader extends AbstractDBReader {
     @Override
     public String[] createInputSplits() {
         logger.info("MySQL的Reader开始进行分片开始....");
-        String inputSql = String.format("select * from %s", configBean.getTable());
-        List<String> results = defaultInputSplits(inputSql);
+        String inputSql = String.format("select %s from %s",configBean.getColumn(), configBean.getTable());
+        List<String> results = defaultInputSplits(configBean.getColumn(),inputSql);
         logger.info("MySQL的Reader开始进行分片结束....");
         String[] array = new String[results.size()];
         return results.toArray(array);

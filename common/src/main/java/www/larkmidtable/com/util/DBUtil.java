@@ -14,59 +14,82 @@ import java.sql.*;
  */
 public class DBUtil {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DBUtil.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DBUtil.class);
 
+	/**
+	 * 获取数据库连接
+	 * 
+	 * @param databaseDriver 驱动类型（根据数据库类型选择）
+	 * @param jdbcUrl        数据库连接信息
+	 * @param username       用户名
+	 * @param password       密码
+	 * @return
+	 */
+	public static Connection getConnection(String databaseDriver, String jdbcUrl, String username, String password)
+			throws SQLException {
+		// 连接数据库
+		return DriverManager.getConnection(jdbcUrl, username, password);
+	}
+	
+	/**
+	 * 关闭连接
+	 * 
+	 * @param stmt
+	 * @param conn
+	 */
+	public static void close(PreparedStatement stmt) {
+		close(stmt, null, null);
+	}
 
-    /**
-     * 获取数据库连接
-     * @param databaseDriver 驱动类型（根据数据库类型选择）
-     * @param jdbcUrl 数据库连接信息
-     * @param username 用户名
-     * @param password 密码
-     * @return
-     */
-    public static Connection getConnection(String databaseDriver,String jdbcUrl,  String username,  String password) throws SQLException {
-        // 连接数据库
-        return DriverManager.getConnection(jdbcUrl, username,password);
-    }
+	/**
+	 * 关闭连接
+	 * 
+	 * @param stmt
+	 * @param conn
+	 */
+	public static void close(Connection conn) {
+		close(null, conn, null);
+	}
 
-    /**
-     * 关闭连接
-     * @param stmt
-     * @param conn
-     */
-    public static void close(PreparedStatement stmt,Connection conn) {
-        close(stmt,conn,null);
-    }
-    /**
-     * 关闭连接
-     * @param stmt
-     * @param conn
-     * @param rs
-     */
-    public static void close(PreparedStatement stmt,Connection conn,ResultSet rs) {
-        if(stmt!=null) {
-            try {
-                stmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if(conn!=null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if(rs!=null) {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	/**
+	 * 关闭连接
+	 * 
+	 * @param stmt
+	 * @param conn
+	 */
+	public static void close(PreparedStatement stmt, Connection conn) {
+		close(stmt, conn, null);
+	}
 
+	/**
+	 * 关闭连接
+	 * 
+	 * @param stmt
+	 * @param conn
+	 * @param rs
+	 */
+	public static void close(PreparedStatement stmt, Connection conn, ResultSet rs) {
+		if (stmt != null) {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 }

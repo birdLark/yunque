@@ -1,12 +1,11 @@
 package www.larkmidtable.com.reader;
 
+import java.util.List;
+import java.util.Queue;
+
 import www.larkmidtable.com.bean.ConfigBean;
 import www.larkmidtable.com.constant.ReaderPluginEnum;
 import www.larkmidtable.com.exception.HongHuException;
-
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  *
