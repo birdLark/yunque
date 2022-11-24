@@ -33,8 +33,13 @@ public  class Channel {
 			reader.open();
 			writer.open();
 			String[] inputSplits = reader.createInputSplits();
+
+			// @TODO 向Channel中写入
 			reader.startRead(inputSplits);
+
+			// @TODO 向Channel中读取
 			writer.startWrite();
+
 			reader.close();
 			writer.close();
 		}catch (Exception e) {

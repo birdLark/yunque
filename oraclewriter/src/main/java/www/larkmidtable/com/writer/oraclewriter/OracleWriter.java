@@ -1,5 +1,6 @@
 package www.larkmidtable.com.writer.oraclewriter;
 
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import www.larkmidtable.com.channel.Channel;
@@ -28,10 +29,8 @@ public class OracleWriter extends Writer {
     public void open() {
         logger.info("Oracle的Writer建立连接开始....");
         try {
-            String url="jdbc:oracle:thin:@localhost:1521:orcl";
-            String username="root";
-            String password="12345678";
-            DBUtil.getConnection(DBType.Oracle.getDriverClass(),url,username,password);
+            connection = DBUtil.getConnection(DBType.Oracle.getDriverClass(),configBean.getUrl(),configBean.getUsername(),configBean.getPassword());
+            connection.setAutoCommit(false);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,13 +41,20 @@ public class OracleWriter extends Writer {
     public void startWrite() {
         logger.info("Oracle开始写数据....");
         List<String> poll = Channel.getQueue().poll();
-        String sql = "insert into student(id,name) values (?,?)";
+        String[] columns = configBean.getColumn().split(",");
+        StringBuffer sb=new StringBuffer();
+        for(int i =0;i<columns.length;i++) {sb.append("?,");}
+        String whstr = sb.toString().substring(0, sb.toString().length() - 1);
+        String sql = String.format("insert into %s(%s) values (%s)",configBean.getTable(),configBean.getColumn(),whstr);
         try {
             // 批量插入时ps对象必须放到for循环外面
             statement = connection.prepareStatement(sql);
             for (int i = 0; i < poll.size(); i++) {
-                statement.setString(1, "mary_" + i);
-                statement.setString(2, poll.get(i));
+                JSONObject jsonObject = JSONObject.parseObject(poll.get(i));
+
+                for(int j =1;j<=columns.length;j++) {
+                    statement.setObject(j,jsonObject.get(columns[j-1]));
+                }
                 statement.addBatch();
                 if (i % 10000 == 0) {
                     statement.executeBatch();
@@ -57,6 +63,8 @@ public class OracleWriter extends Writer {
                 }
             }
             statement.executeBatch();
+            connection.commit();
+            statement.clearBatch();
         }catch (Exception e) {
             e.printStackTrace();
         }
