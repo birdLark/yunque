@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.util.DBType;
+import www.larkmidtable.com.reader.AbstractDBReader;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.Queue;
  * @Date 2022-11-21 14:56
  * @Description:
  **/
-public class HiveReader extends Reader {
+public class HiveReader extends  AbstractDBReader {
 
 	private Connection connection ;
 	private PreparedStatement statement ;
@@ -40,16 +41,13 @@ public class HiveReader extends Reader {
 	public Queue<List<String>> startRead(String[] inputSplits) {
 		logger.info("Hive读取数据操作....");
 		try {
-			List<String> records =  new ArrayList<>();
-			String sql = String.format("select * from  %s",configBean.getTable());
-			statement = connection.prepareCall(sql);
-			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				String name = resultSet.getString(configBean.getColumn());
-				records.add(name);
+			if (inputSplits.length > 1) {
+				// 开启多线程肚
+				batchStartRead(connection, inputSplits);
+			} else {
+				defaultSingleStartRead(connection, inputSplits[0]);
 			}
-			Channel.getQueue().add(records);
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("Hive读取数据结束....");
@@ -60,8 +58,12 @@ public class HiveReader extends Reader {
 	@Override
 	public String[] createInputSplits() {
 		logger.info("Hive的Reader开始进行分片开始....");
+		String inputSql = String.format("select %s from %s",configBean.getColumn(), configBean.getTable());
+		List<String> results = defaultInputSplits(configBean.getColumn(),inputSql);
+		String[] array = new String[results.size()];
 		logger.info("Hive的Reader开始进行分片结束....");
-		return new String[5];
+		return results.toArray(array);
+
 	}
 
 	@Override
@@ -75,5 +77,28 @@ public class HiveReader extends Reader {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public int count() {
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement =
+					connection.prepareStatement("SELECT count(*) FROM " + configBean.getTable());
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			return resultSet.getInt(1);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		} finally {
+			if (preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0;
 	}
 }

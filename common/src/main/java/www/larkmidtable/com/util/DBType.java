@@ -58,6 +58,11 @@ public enum DBType {
 			return "ru.yandex.clickhouse.ClickHouseDriver";
 		}
 	},
+	Hive{
+		public String getDriverClass(){//枚举对象实现抽象方法
+			return "org.apache.hive.jdbc.HiveDriver";
+		}
+	},
 	;
 	public abstract String getDriverClass();//定义抽象方法
 

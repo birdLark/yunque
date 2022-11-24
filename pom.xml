@@ -44,6 +44,8 @@
         <module>hdfswriter</module>
         <module>pgwriter</module>
         <module>pgreader</module>
+        <module>hivereader</module>
+        <module>hivewriter</module>
         <module>clickhousewriter</module>
         <module>clickhousereader</module>
     </modules>
