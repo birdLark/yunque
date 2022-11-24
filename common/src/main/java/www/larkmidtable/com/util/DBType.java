@@ -48,6 +48,11 @@ public enum DBType {
 			return "com.kingbase8.Driver";
 		}
 	},
+	ClickHouse{
+		public String getDriverClass(){//枚举对象实现抽象方法
+			return "ru.yandex.clickhouse.ClickHouseDriver";
+		}
+	},
 	;
 	public abstract String getDriverClass();//定义抽象方法
 

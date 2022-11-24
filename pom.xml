@@ -32,8 +32,8 @@
         <module>dorisread</module>
         <module>doriswriter</module>
 
-        <module>starRocks-reader</module>
-        <module>starRocks-writer</module>
+        <module>starrocksreader</module>
+        <module>starrockswriter</module>
 
         <module>kafkareader</module>
         <module>kafkawriter</module>
@@ -44,6 +44,8 @@
         <module>hdfswriter</module>
         <module>pgwriter</module>
         <module>pgreader</module>
+        <module>clickhousewriter</module>
+        <module>clickhousereader</module>
     </modules>
 
     <properties>
@@ -91,6 +93,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.22</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.18</version>
         </dependency>
 
         <dependency>
@@ -163,6 +170,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+
                 <configuration>
                     <source>${jdk-version}</source>
                     <target>${jdk-version}</target>

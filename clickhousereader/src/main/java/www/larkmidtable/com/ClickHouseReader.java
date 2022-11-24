@@ -1,4 +1,4 @@
-package com;
+package www.larkmidtable.com;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,20 +12,23 @@ import java.util.Queue;
 
 /**
  * @Date: 2022/11/14 11:01
+ * @Description:
  **/
-public class DB2Reader extends AbstractDBReader {
+public class ClickHouseReader extends AbstractDBReader {
 
     private Connection connection;
-    private static final Logger logger = LoggerFactory.getLogger(DB2Reader.class);
+    // private PreparedStatement statement;
+    private static Logger logger = LoggerFactory.getLogger(ClickHouseReader.class);
+
 
     @Override
     public void open() {
         try {
-            logger.info("db2的Reader建立连接开始....");
-            Class.forName(DBType.DB2.getDriverClass());
+            logger.info("ClickHouse的Reader建立连接开始....");
+            Class.forName(DBType.ClickHouse.getDriverClass());
             connection = DriverManager
                     .getConnection(configBean.getUrl(), configBean.getUsername(), configBean.getPassword());
-            logger.info("db2的Reader建立连接结束....");
+            logger.info("ClickHouse的Reader建立连接结束....");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -33,7 +36,7 @@ public class DB2Reader extends AbstractDBReader {
 
     @Override
     public Queue<List<String>> startRead(String[] inputSplits) {
-        logger.info("DB2读取数据操作....");
+        logger.info("ClickHouse读取数据操作....");
         try {
             if (inputSplits.length > 1) {
                 // 开启多线程肚
@@ -44,17 +47,17 @@ public class DB2Reader extends AbstractDBReader {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        logger.info("DB2读取数据结束....");
+        logger.info("ClickHouse读取数据结束....");
         return Channel.getQueue();
     }
 
 
     @Override
     public String[] createInputSplits() {
-        logger.info("DB2的Reader开始进行分片开始....");
-        String inputSql = String.format("select %s from %s", configBean.getColumn(),configBean.getTable());
+        logger.info("ClickHouse的Reader开始进行分片开始....");
+        String inputSql = String.format("select %s from %s",configBean.getColumn(), configBean.getTable());
         List<String> results = defaultInputSplits(configBean.getColumn(),inputSql);
-        logger.info("DB2的Reader开始进行分片结束....");
+        logger.info("ClickHouse的Reader开始进行分片结束....");
         String[] array = new String[results.size()];
         return results.toArray(array);
     }
@@ -62,9 +65,9 @@ public class DB2Reader extends AbstractDBReader {
     @Override
     public void close() {
         try {
-            logger.info("DB2的Reader开始进行关闭连接开始....");
+            logger.info("ClickHouse的Reader开始进行关闭连接开始....");
             connection.close();
-            logger.info("DB2的Reader开始进行关闭连接结束....");
+            logger.info("ClickHouse的Reader开始进行关闭连接结束....");
         } catch (SQLException e) {
             e.printStackTrace();
         }
