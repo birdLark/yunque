@@ -1,5 +1,6 @@
 package www.larkmidtable.com;
 
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import www.larkmidtable.com.channel.Channel;
@@ -10,8 +11,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -21,37 +20,19 @@ import java.util.Queue;
  * @Date: 2022/11/14 11:01
  * @Description:
  **/
-public class StartRockerWriter extends Writer {
+public class ClickHouseWriter extends Writer {
 
 	private Connection connection ;
 	private PreparedStatement statement ;
-	private static Logger logger = LoggerFactory.getLogger(StartRockerWriter.class);
-
-
-	public static void main(String[] args) {
-		StartRockerWriter r = new StartRockerWriter();
-		r.open();
-		List<String> poll = new ArrayList<String>();
-		poll.add("beijing");
-		poll.add("shanghai");
-		poll.add("hefei");
-		poll.add("guangzou");
-		poll.add("chengdu");
-		poll.add("shenzheng ");
-		Queue<List<String>> queue = new LinkedList<List<String>>();
-		queue.add(poll);
-		r.startWrite();
-	}
-
+	private static Logger logger = LoggerFactory.getLogger(ClickHouseWriter.class);
 	@Override
 	public void open() {
 		try {
-			logger.info("starRocks的Writer建立连接开始....");
-			Class.forName(DBType.MySql8.getDriverClass());
-			connection = DriverManager
-					.getConnection("jdbc:mysql://10.28.60.132:9030/example_db?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC","root","root");
+			logger.info("ClickHouse的Writer建立连接开始....");
+			Class.forName(DBType.ClickHouse.getDriverClass());
+			connection = DriverManager.getConnection(configBean.getUrl(),configBean.getUsername(),configBean.getPassword());
 			connection.setAutoCommit(false);
-			logger.info("starRocks的Writer建立连接结束....");
+			logger.info("ClickHouse的Writer建立连接结束....");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,14 +42,19 @@ public class StartRockerWriter extends Writer {
 	public void startWrite() {
 		logger.info("开始写数据....");
 		List<String> poll = Channel.getQueue().poll();
-		String sql = "insert into table1(siteid,citycode,username,pv) values (?,?,?,?)";
+		String[] columns = configBean.getColumn().split(",");
+		StringBuffer sb=new StringBuffer();
+		for(int i =0;i<columns.length;i++) {sb.append("?,");}
+		String whstr = sb.toString().substring(0, sb.toString().length() - 1);
+		String sql = String.format("insert into %s(%s) values (%s)",configBean.getTable(),configBean.getColumn(),whstr);
 		try {
 			statement = connection.prepareStatement(sql); // 批量插入时ps对象必须放到for循环外面
 			for (int i = 0; i < poll.size(); i++) {
-				statement.setInt(1, i+1);
-				statement.setInt(2, i+1);
-				statement.setString(3, poll.get(i) + i);
-				statement.setInt(4, i%100);
+				JSONObject jsonObject = JSONObject.parseObject(poll.get(i));
+
+				for(int j =1;j<=columns.length;j++) {
+					statement.setObject(j,jsonObject.get(columns[j-1]));
+				}
 				statement.addBatch();
 				if (i % 10000 == 0) {
 					statement.executeBatch();
@@ -77,6 +63,8 @@ public class StartRockerWriter extends Writer {
 				}
 			}
 			statement.executeBatch();
+			connection.commit();
+			statement.clearBatch();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,10 +74,10 @@ public class StartRockerWriter extends Writer {
 	@Override
 	public void close() {
 		try {
-			logger.info("starRocks的Writer开始进行关闭连接开始....");
+			logger.info("ClickHouse的Writer开始进行关闭连接开始....");
 			statement.close();
 			connection.close();
-			logger.info("starRocks的Writer开始进行关闭连接结束....");
+			logger.info("ClickHouse的Writer开始进行关闭连接结束....");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

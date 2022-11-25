@@ -114,7 +114,7 @@
 		</dependency>
 		<dependency>
             <groupId>www.larkmidtable.com</groupId>
-            <artifactId>starRocks-reader</artifactId>
+            <artifactId>starrocksreader</artifactId>
             <version>1.0-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
@@ -125,7 +125,29 @@
         </dependency>
         <dependency>
             <groupId>www.larkmidtable.com</groupId>
-            <artifactId>starRocks-writer</artifactId>
+            <artifactId>starrockswriter</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+		<dependency>
+            <groupId>www.larkmidtable.com</groupId>
+            <artifactId>clickhousereader</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>www.larkmidtable.com</groupId>
+            <artifactId>clickhousewriter</artifactId>
             <version>1.0-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
