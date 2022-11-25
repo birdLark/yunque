@@ -7,15 +7,19 @@ import www.larkmidtable.com.reader.AbstractDBReader;
 import www.larkmidtable.com.util.DBType;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ForkJoinTask;
 
 /**
  * @Date: 2022/11/14 11:01
  * @Description:
  **/
 public class MySQLReader extends AbstractDBReader {
-
+    ForkJoinPool forkJoinPool;
     private Connection connection;
     // private PreparedStatement statement;
     private static Logger logger = LoggerFactory.getLogger(MySQLReader.class);
@@ -23,6 +27,7 @@ public class MySQLReader extends AbstractDBReader {
 
     @Override
     public void open() {
+        forkJoinPool = new ForkJoinPool(Math.max(32, Runtime.getRuntime().availableProcessors()));
         try {
             logger.info("MySQL的Reader建立连接开始....");
             Class.forName(DBType.MySql.getDriverClass());
@@ -34,16 +39,39 @@ public class MySQLReader extends AbstractDBReader {
         }
     }
 
+//    @Override
+//    public Queue<List<String>> startRead(String[] inputSplits) {
+//        logger.info("MySQL读取数据操作....");
+//        try {
+//            if (inputSplits.length > 1) {
+//                // 开启多线程肚
+//                batchStartRead(connection, inputSplits);
+//            } else {
+//                defaultSingleStartRead(connection, inputSplits[0]);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        logger.info("MySQL读取数据结束....");
+//        return Channel.getQueue();
+//    }
     @Override
     public Queue<List<String>> startRead(String[] inputSplits) {
         logger.info("MySQL读取数据操作....");
         try {
-            if (inputSplits.length > 1) {
-                // 开启多线程肚
-                batchStartRead(connection, inputSplits);
-            } else {
-                defaultSingleStartRead(connection, inputSplits[0]);
+            if(inputSplits.length > 0) {
+                List<MySQLReaderParams> params = new ArrayList<>();
+                for (String inputSplit : inputSplits) {
+                    params.add(new MySQLReaderParams(connection,inputSplit));
+                }
+                MySQLReaderTask mySQLReaderTask = new MySQLReaderTask();
+                mySQLReaderTask.setSingleThreadSize(1);
+                mySQLReaderTask.setTaskParams(params);
+                ForkJoinTask<List<String>> submit = forkJoinPool.submit(mySQLReaderTask);
+                submit.get();//阻塞，内部已经存队列
+                return Channel.getQueue();
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
