@@ -22,6 +22,11 @@ public class HdfsWriter extends Writer {
     private String writePath;
     private int batchSize ;
 
+    /**
+     *
+     * @param conf
+     * @throws IOException
+     */
     public HdfsWriter(Configuration conf) throws IOException {
         this.conf = conf;
         fs = FileSystem.get(conf);

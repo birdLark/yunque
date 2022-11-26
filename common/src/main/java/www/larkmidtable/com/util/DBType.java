@@ -28,6 +28,11 @@ public enum DBType {
 			return "com.mysql.cj.jdbc.Driver";
 		}
 	},
+	StarRocks{
+		public String getDriverClass(){//枚举对象实现抽象方法
+			return "com.mysql.cj.jdbc.Driver";
+		}
+	},
 	Oracle{
 		public String getDriverClass(){//枚举对象实现抽象方法
 			return "oracle.jdbc.OracleDriver";
@@ -51,6 +56,11 @@ public enum DBType {
 	ClickHouse{
 		public String getDriverClass(){//枚举对象实现抽象方法
 			return "ru.yandex.clickhouse.ClickHouseDriver";
+		}
+	},
+	Hive{
+		public String getDriverClass(){//枚举对象实现抽象方法
+			return "org.apache.hive.jdbc.HiveDriver";
 		}
 	},
 	;

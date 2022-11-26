@@ -9,9 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>www.larkmidtable.com</groupId>
-    <artifactId>pgwriter</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>hivewriter</artifactId>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -25,19 +28,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--pg-->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.4.1207</version>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
+
 
 </project>
