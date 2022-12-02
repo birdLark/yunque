@@ -1,11 +1,8 @@
 package www.larkmidtable.com.channel;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.writer.Writer;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -16,9 +13,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @Date: 2022/11/14 18:18
  * @Description:
  **/
-public  class Channel {
+public  abstract class Channel {
 
-	private static Queue<List<String>> queue = new LinkedBlockingQueue<List<String>>();
+	private static Queue<List<String>> queue = null;
 
 	public static Queue<List<String>> getQueue() {
 		return queue;

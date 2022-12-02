@@ -23,5 +23,11 @@ public class ConfigConstant {
 	public static final String WRITER_PLUGIN_TABLE = "table";
 	public static final String WRITER_PLUGIN_COLUMN = "column";
 
+	public static final String KAFKA= "kafka";
+	public static final String HOST= "host";
+	public static final String TOPIC = "topic";
+	public static final String CLIENTID = "clientId";
+	public static final String GROUPID = "groupId";
+
 
 }

@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 import www.larkmidtable.com.bean.ConfigBean;
 import www.larkmidtable.com.channel.Channel;
+import www.larkmidtable.com.channel.DefaultChannel;
+import www.larkmidtable.com.channel.KafkaChannel;
 import www.larkmidtable.com.exception.HongHuException;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.writer.Writer;
@@ -66,7 +68,10 @@ public class HongHuStart {
 		Writer writer = Writer.getWriterPlugin(writerPlugin,writerConfigBean);
 
 		logger.info("进行读写任务....");
-		Channel channel = new Channel();
+		//通过new KafkaChannel 切换队列
+		/*Map<String, String> kafkaConfig = jobMap.get(ConfigConstant.KAFKA);
+		Channel channel = new KafkaChannel(kafkaConfig.get(ConfigConstant.HOST),kafkaConfig.get(ConfigConstant.TOPIC),kafkaConfig.get(ConfigConstant.CLIENTID),kafkaConfig.get(ConfigConstant.GROUPID));*/
+		Channel channel=new DefaultChannel();
 		channel.channel(reader, writer);
 		logger.info("结束迁移任务....");
 

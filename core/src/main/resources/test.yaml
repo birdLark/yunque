@@ -14,3 +14,12 @@ writer:
   password: "root"
   table: "student_1"
   column: "id,name,address"
+
+
+kafka:
+  host: localhost:9092
+  topic: hu_topic
+  clientId: hu_client
+  groupId: hu_group
+
+
