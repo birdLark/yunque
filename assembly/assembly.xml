@@ -6,23 +6,50 @@
     <formats>
         <format>tar.gz</format>
     </formats>
-
+    <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
+
         <fileSet>
-            <directory>${project.basedir}/bin</directory>
+            <directory>${project.parent.basedir}/bin</directory>
+            <outputDirectory>bin</outputDirectory>
         </fileSet>
+
         <fileSet>
-            <directory>${project.basedir}/logs</directory>
+            <directory>${project.parent.basedir}/config</directory>
+            <outputDirectory>config</outputDirectory>
         </fileSet>
+
         <fileSet>
-            <directory>${project.basedir}/libs</directory>
+            <directory>${project.parent.basedir}/doc</directory>
+            <outputDirectory>doc</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.parent.basedir}/docker</directory>
+            <outputDirectory>docker</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.parent.basedir}/logs</directory>
+            <outputDirectory>logs</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.parent.basedir}</directory>
+            <outputDirectory>./</outputDirectory>
+            <includes>
+                <include>LICENSE</include>
+                <include>README.md</include>
+                <include>README.en.md</include>
+            </includes>
         </fileSet>
     </fileSets>
-    <files>
-        <file>
-            <source>${project.basedir}/target/honghu-1.0-SNAPSHOT.jar</source>
-            <destName>lib/honghu-v1.0.jar</destName>
-        </file>
-    </files>
-
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <unpack>false</unpack>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+    <componentDescriptors/>
 </assembly>

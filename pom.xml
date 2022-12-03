@@ -11,7 +11,6 @@
 
     <modules>
         <module>common</module>
-        <module>core</module>
         <module>mysqlreader</module>
         <module>mysqlwriter</module>
 
@@ -22,7 +21,7 @@
         <module>dmwriter</module>
 
         <module>sqlserverreader</module>
-		<module>sqlserverwriter</module>
+        <module>sqlserverwriter</module>
 
         <module>elasticsearchwriter</module>
         <module>elasticsearchreader</module>
@@ -49,6 +48,8 @@
         <module>hivewriter</module>
         <module>clickhousewriter</module>
         <module>clickhousereader</module>
+        <!--核心入口类，会依赖其他模块-->
+        <module>core</module>
     </modules>
 
     <properties>
@@ -143,41 +144,27 @@
     <build>
         <plugins>
             <!--指定JDK和Maven的版本-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>3.1</version>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash;指定jdk的版本&ndash;&gt;-->
+<!--                    <source>1.8</source>-->
+<!--                    <target>1.8</target>-->
+<!--                    &lt;!&ndash;打包包含lib下的jar包&ndash;&gt;-->
+<!--                    <compilerArguments>-->
+<!--                        <extdirs>${project.basedir}/lib</extdirs>-->
+<!--                    </compilerArguments>-->
+<!--                    <compilerArgument>-parameters</compilerArgument>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
                 <configuration>
-                    <!--指定jdk的版本-->
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <!--打包包含lib下的jar包-->
-                    <compilerArguments>
-                        <extdirs>${project.basedir}/lib</extdirs>
-                    </compilerArguments>
-                    <compilerArgument>-parameters</compilerArgument>
+                    <parameters>true</parameters>
                 </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <outputDirectory>${project.basedir}/package</outputDirectory>
-                    <finalName>honghu</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <descriptors>
-                        <descriptor>assembly/assembly.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
