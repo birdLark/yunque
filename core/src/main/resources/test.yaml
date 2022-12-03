@@ -23,3 +23,6 @@ kafka:
   groupId: hu_group
 
 
+
+log:
+  logPath: D:\temp\data\hulogs

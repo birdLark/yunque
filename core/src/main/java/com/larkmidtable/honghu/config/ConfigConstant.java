@@ -29,5 +29,9 @@ public class ConfigConstant {
 	public static final String CLIENTID = "clientId";
 	public static final String GROUPID = "groupId";
 
+	public static final String JOB= "log";
+	public static final String LOGPATH= "logPath";
+
+
 
 }
