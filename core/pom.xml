@@ -186,7 +186,7 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
-							<finalName>honghu-${version}</finalName>
+							<finalName>yunque-${version}</finalName>
 							<descriptors>
 								<descriptor>assembly/assembly.xml</descriptor>
 							</descriptors>
