@@ -166,7 +166,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.larkmidtable.yunque.HongHuStart</mainClass>
+							<mainClass>com.larkmidtable.yunque.YunQueStart</mainClass>
 						</manifest>
 						<manifestEntries>
 							<Class-Path>.</Class-Path>

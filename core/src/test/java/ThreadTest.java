@@ -1,4 +1,3 @@
-import com.larkmidtable.yunque.HongHuStart;
 import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,7 @@ import org.slf4j.LoggerFactory;
  **/
 public class ThreadTest {
 	// 定义日志对象
-	private static Logger logger = LoggerFactory.getLogger(HongHuStart.class);
+	private static Logger logger = LoggerFactory.getLogger(com.larkmidtable.yunque.YunQueStart.class);
 
 	public static void main(String[] args) throws ParseException {
 
