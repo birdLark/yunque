@@ -37,8 +37,8 @@ public class YunQueStart {
 	public static void main(String[] args) throws ParseException {
 
 		logger.info("迁移程序，正式启动中....");
-		logger.info("解析传递的参数....");
 
+		logger.info("解析传递的参数....");
 		Options options = new Options();
 		options.addOption("job", true, "作业配置");
 		options.addOption("jobId", true, "作业id");
@@ -53,7 +53,7 @@ public class YunQueStart {
 		if (jobIdString!=null && !"-1".equalsIgnoreCase(jobIdString)) {
 			jobId = Long.parseLong(jobIdString);
 		}
-		logger.info("作业名称{} ,作业ID{} ,作业的路径{}  ", jobName , jobId , yamlPath);
+		logger.info("作业名称{} ,作业ID{} ,作业的路径{}", jobName , jobId , yamlPath);
 		logger.info("读取作业配置文件....");
 		BufferedReader br = null;
 		try {
