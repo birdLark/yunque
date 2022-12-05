@@ -19,7 +19,6 @@ Thumbs.db
 *.iml
 */*.iml
 # Package Files #
-*.jar
 *.war
 *.ear
 
