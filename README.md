@@ -17,13 +17,13 @@
 
 # 2.云雀的架构图
 
-![V1.0的架构图](./picture/a.jpg)
+![V1.0的架构图](./docs/images/a.jpg)
 
 
 
 # 3.云雀的流程图
 
-![V1.0的架构图](./picture/b.jpg)
+![V1.0的架构图](./docs/images/b.jpg)
 
 
 
