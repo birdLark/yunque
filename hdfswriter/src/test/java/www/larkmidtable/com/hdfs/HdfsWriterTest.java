@@ -27,7 +27,7 @@ public class HdfsWriterTest {
 
     @Test
     public void testWrite() {
-        hdfsWriter.setWritePath("/my/honghu/honghu1.txt");
+        hdfsWriter.setWritePath("/my/yunque/yunque1.txt");
         List<String> data = new ArrayList<>();
         data.add("1\0011\001小明\001足球\001这是一个喜欢运动的小孩.\n");
         data.add("2\0011\001小东\001乒乓球\001兴趣广泛\n");
@@ -35,7 +35,7 @@ public class HdfsWriterTest {
         Channel.getQueue().add(data);
         hdfsWriter.startWrite();
 
-        hdfsWriter.setWritePath("/my/honghu/honghu2.txt");
+        hdfsWriter.setWritePath("/my/yunque/yunque2.txt");
         data = new ArrayList<>();
         data.add("5\0011\001七工\001足球2\001这是一苦区区.\n");
         data.add("6\0011\001和开\001乒乓球2\001钱列须鹅\n");
@@ -44,7 +44,7 @@ public class HdfsWriterTest {
         hdfsWriter.startWrite();
 
 
-        hdfsWriter.setWritePath("/my/honghu/honghu3.txt");
+        hdfsWriter.setWritePath("/my/yunque/yunque3.txt");
         data = new ArrayList<>();
         data.add("8\0012\001基\001足球3\001这苦列景.\n");
         data.add("9\0012\001村\001乒乓球3\00142主则\n");
@@ -54,7 +54,7 @@ public class HdfsWriterTest {
 
 
 
-        hdfsWriter.setWritePath("/my/honghu/honghu4.txt");
+        hdfsWriter.setWritePath("/my/yunque/yunque4.txt");
         data = new ArrayList<>();
         data.add("12\0012\001苦载\001足球4\001瞧向\n");
         data.add("13\0013\0012找载\001乒乓球4\001信脾\n");
@@ -64,7 +64,7 @@ public class HdfsWriterTest {
 
 
 
-        hdfsWriter.setWritePath("/my/honghu/honghu5.txt");
+        hdfsWriter.setWritePath("/my/yunque/yunque5.txt");
         data = new ArrayList<>();
         data.add("24\0010\001磕到\001足球5\001【8得跟.\n");
         data.add("25\0010\001有5用不上\001乒乓球5\0014遥\n");

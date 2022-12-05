@@ -8,7 +8,7 @@ import java.sql.*;
 /**
  * @author stave_zhao
  * @title: DBUtil
- * @projectName honghu
+ * @projectName yunque
  * @description: 数据库连接工具类
  * @date 2022/11/1509:13
  */
@@ -18,7 +18,7 @@ public class DBUtil {
 
 	/**
 	 * 获取数据库连接
-	 * 
+	 *
 	 * @param databaseDriver 驱动类型（根据数据库类型选择）
 	 * @param jdbcUrl        数据库连接信息
 	 * @param username       用户名
@@ -30,10 +30,10 @@ public class DBUtil {
 		// 连接数据库
 		return DriverManager.getConnection(jdbcUrl, username, password);
 	}
-	
+
 	/**
 	 * 关闭连接
-	 * 
+	 *
 	 * @param stmt
 	 * @param conn
 	 */
@@ -43,7 +43,7 @@ public class DBUtil {
 
 	/**
 	 * 关闭连接
-	 * 
+	 *
 	 * @param stmt
 	 * @param conn
 	 */
@@ -53,7 +53,7 @@ public class DBUtil {
 
 	/**
 	 * 关闭连接
-	 * 
+	 *
 	 * @param stmt
 	 * @param conn
 	 */
@@ -63,7 +63,7 @@ public class DBUtil {
 
 	/**
 	 * 关闭连接
-	 * 
+	 *
 	 * @param stmt
 	 * @param conn
 	 * @param rs

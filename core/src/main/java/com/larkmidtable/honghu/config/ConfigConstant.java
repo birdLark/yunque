@@ -1,4 +1,4 @@
-package com.larkmidtable.honghu.config;
+package com.larkmidtable.yunque.config;
 
 /**
  *

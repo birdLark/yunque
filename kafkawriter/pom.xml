@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <parent>
-    <artifactId>honghu</artifactId>
+    <artifactId>yunque</artifactId>
     <groupId>www.larkmidtable.com</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>

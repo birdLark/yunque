@@ -17,7 +17,7 @@ import java.util.Queue;
 /**
  * @author stave_zhao
  * @title: OracleWriter
- * @projectName honghu
+ * @projectName yunque
  * @description: oracle 写数据工具类
  * @date 2022/11/1509:12
  */

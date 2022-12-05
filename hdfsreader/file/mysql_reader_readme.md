@@ -5,7 +5,7 @@ reader:
   plugin: "hdfsreader"
   url: "hdfs://127.0.0.1:9000"
   username: "root"
-  reader_path: "/my/honghu"
+  reader_path: "/my/yunque"
 `
 
 # 2.参数的说明

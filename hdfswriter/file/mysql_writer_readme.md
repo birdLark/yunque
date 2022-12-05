@@ -5,7 +5,7 @@ writer:
   plugin: "mysqlwriter"
   url: "hdfs://127.0.0.1:9000"
   username: "root"
-  writer_path: "/my/honghu/honghu.txt"
+  writer_path: "/my/yunque/yunque.txt"
 `
 
 # 2.参数的说明

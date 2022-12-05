@@ -38,7 +38,7 @@ public class HdfsWriterTaskTest {
                 HdfsWriterParams hwp = new HdfsWriterParams();
                 hwp.setHdfsUrl("hdfs://127.0.0.1:9000");
                 hwp.setUsername("Administrator");
-                hwp.setPath("/my/honghu/honghu"+index+".txt");
+                hwp.setPath("/my/yunque/yunque"+index+".txt");
                 hwp.setQueueData(data);
                 data = new ArrayList<>();
                 index ++;

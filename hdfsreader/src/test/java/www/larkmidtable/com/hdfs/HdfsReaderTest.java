@@ -28,7 +28,7 @@ public class HdfsReaderTest {
 
     @Test
     public void testReader() {
-        hdfsReader.setReadPath("/my/honghu/honghu1.txt");
+        hdfsReader.setReadPath("/my/yunque/yunque1.txt");
         Queue<List<String>> queue = hdfsReader.startRead(null);
         hdfsReader.close();
         List<String> poll = queue.poll();
@@ -51,7 +51,7 @@ public class HdfsReaderTest {
     @Test
     public void testPut() throws IOException {
         // 参数解读：参数一：表示删除元数据  参数二：是否允许覆盖  参数三：元数据路径  参数四：目的地路径
-        hdfsReader.getFs().copyFromLocalFile(false, true, new Path("D:\\honghu.txt"), new Path("hdfs://127.0.0.1:9000/my/honghu"));
+        hdfsReader.getFs().copyFromLocalFile(false, true, new Path("D:\\yunque.txt"), new Path("hdfs://127.0.0.1:9000/my/yunque"));
     }
 
 
@@ -60,7 +60,7 @@ public class HdfsReaderTest {
         /**
          *  参数解读： 参数一：源文件是否删除  参数二：源文件的路径  参数三：目标路径  参数四：是否关闭校验
          */
-        hdfsReader.getFs().copyToLocalFile(false, new Path("hdfs://127.0.0.1:9000/my/demo/honghu"), new Path("D:\\honghu2.txt"), true);
+        hdfsReader.getFs().copyToLocalFile(false, new Path("hdfs://127.0.0.1:9000/my/demo/yunque"), new Path("D:\\yunque2.txt"), true);
     }
 
 
@@ -77,7 +77,7 @@ public class HdfsReaderTest {
         //fs.delete(new Path("/xiyou"),false);
 
         //删除非空目录
-        hdfsReader.getFs().delete(new Path("hdfs://127.0.0.1:9000/my/demo/honghu"), true);
+        hdfsReader.getFs().delete(new Path("hdfs://127.0.0.1:9000/my/demo/yunque"), true);
     }
 
 
@@ -93,7 +93,7 @@ public class HdfsReaderTest {
         //文件的更名和移动
         //fs.rename(new Path("hdfs://hadoop102/sanguo/guanyu.txt"),new Path("hdfs://hadoop102/dianwei.txt"));
         // 文件夹更名
-        hdfsReader.getFs().rename(new Path("/my/demo"), new Path("/my/honghu"));
+        hdfsReader.getFs().rename(new Path("/my/demo"), new Path("/my/yunque"));
     }
 
 

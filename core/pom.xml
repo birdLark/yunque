@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<artifactId>honghu</artifactId>
+		<artifactId>yunque</artifactId>
 		<groupId>www.larkmidtable.com</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
@@ -166,7 +166,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.larkmidtable.honghu.HongHuStart</mainClass>
+							<mainClass>com.larkmidtable.yunque.HongHuStart</mainClass>
 						</manifest>
 						<manifestEntries>
 							<Class-Path>.</Class-Path>
@@ -200,7 +200,7 @@
 <!--				<version>3.1.0</version>-->
 <!--				<configuration>-->
 <!--					<outputDirectory>${project.basedir}/package</outputDirectory>-->
-<!--					<finalName>honghu</finalName>-->
+<!--					<finalName>yunque</finalName>-->
 <!--					<appendAssemblyId>false</appendAssemblyId>-->
 <!--					<descriptors>-->
 <!--						<descriptor>assembly/assembly.xml</descriptor>-->

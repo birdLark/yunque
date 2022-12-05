@@ -26,7 +26,7 @@ public class HdfsReaderTaskTest {
             HdfsReaderParams hdfsReaderParams1 = new HdfsReaderParams();
             hdfsReaderParams1.setHdfsUrl("hdfs://127.0.0.1:9000");
             hdfsReaderParams1.setUsername("Administrator");
-            hdfsReaderParams1.setPath("/my/honghu/honghu"+i+".txt");
+            hdfsReaderParams1.setPath("/my/yunque/yunque"+i+".txt");
             params.add(hdfsReaderParams1);
         }
 
