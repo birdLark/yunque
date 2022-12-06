@@ -1,6 +1,7 @@
 package com.larkmidtable.yunque;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.larkmidtable.yunque.config.ConfigConstant;
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -16,12 +17,16 @@ import www.larkmidtable.com.exception.HongHuException;
 import www.larkmidtable.com.log.HuFileAppender;
 import www.larkmidtable.com.log.HuLogger;
 import www.larkmidtable.com.reader.Reader;
+import www.larkmidtable.com.transformer.TransformerExecution;
+import www.larkmidtable.com.transformer.TransformerInfo;
+import www.larkmidtable.com.util.TransformerUtil;
 import www.larkmidtable.com.writer.Writer;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -56,6 +61,7 @@ public class YunQueStart {
 		logger.info("作业名称{} ,作业ID{} ,作业的路径{}", jobName , jobId , yamlPath);
 		logger.info("读取作业配置文件....");
 		BufferedReader br = null;
+		 yamlPath="D:\\java\\code\\etl\\honghu\\conf\\mysql2mysql.yaml";
 		try {
 			br = new BufferedReader(new FileReader(yamlPath));
 		} catch (FileNotFoundException e) {
@@ -67,13 +73,17 @@ public class YunQueStart {
 		Map<String, Map<String, String>> jobMap = (Map<String, Map<String, String>>) yaml.load(br);
 		logger.info("解析配置文件....");
 		//日志初始化
-		Map<String, String> jobConfig = jobMap.get(ConfigConstant.JOB);
+		Map<String, String> jobConfig = jobMap.get(ConfigConstant.LOG);
 		HuFileAppender.initLogPath(jobConfig.get(ConfigConstant.LOGPATH));
 		//todo logId 参数获取
 		String logFileName = HuFileAppender.makeLogFileName(new Date(), jobId);
 		HuFileAppender.contextHolder.set(logFileName);
-
-
+		logger.info("加载Transformer插件....");
+		List<TransformerExecution> transformerExecutionList=null;
+		if(jobMap.get(ConfigConstant.TRANSFORMER)!=null){
+			List<TransformerInfo> transformerInfos= JSONArray.parseArray(JSONArray.toJSONString(jobMap.get(ConfigConstant.TRANSFORMER)),TransformerInfo.class);
+			 transformerExecutionList = TransformerUtil.buildTransformerInfo(transformerInfos);
+		}
 		Map<String, String> readerConfig = jobMap.get(ConfigConstant.READER);
 		Map<String, String> writerConfig = jobMap.get(ConfigConstant.WRITER);
 		ConfigBean readerConfigBean = JSON.parseObject(JSON.toJSONString(readerConfig), ConfigBean.class);
@@ -92,7 +102,7 @@ public class YunQueStart {
 		//通过new KafkaChannel 切换队列
 		/*Map<String, String> kafkaConfig = jobMap.get(ConfigConstant.KAFKA);
 		Channel channel = new KafkaChannel(kafkaConfig.get(ConfigConstant.HOST),kafkaConfig.get(ConfigConstant.TOPIC),kafkaConfig.get(ConfigConstant.CLIENTID),kafkaConfig.get(ConfigConstant.GROUPID));*/
-		Channel channel=new DefaultChannel();
+		Channel channel=new DefaultChannel(transformerExecutionList);
 		channel.channel(reader, writer);
 		logger.info("结束迁移任务....");
 

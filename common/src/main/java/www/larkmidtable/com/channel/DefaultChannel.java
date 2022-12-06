@@ -2,9 +2,11 @@ package www.larkmidtable.com.channel;
 
 
 
+import www.larkmidtable.com.queue.DefaultQueue;
+import www.larkmidtable.com.transformer.TransformerExecution;
+
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @Description:  kafka通道
@@ -12,8 +14,8 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class DefaultChannel extends  Channel {
 
-    public DefaultChannel() {
-        Queue<List<String>> queue = new LinkedBlockingQueue<List<String>>();
+    public DefaultChannel(List<TransformerExecution> transformerExecutionList ) {
+        Queue<List<String>> queue = new DefaultQueue(transformerExecutionList);
         this.setQueue(queue);
     }
 }

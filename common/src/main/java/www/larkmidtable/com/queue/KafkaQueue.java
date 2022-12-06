@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import www.larkmidtable.com.mq.ListDeserializer;
 import www.larkmidtable.com.mq.ListSerializer;
+import www.larkmidtable.com.transformer.TransformerExecution;
 
 import java.time.Duration;
 import java.util.*;
@@ -28,15 +29,18 @@ public class KafkaQueue extends LinkedBlockingQueue {
     private   String groupId = "group.hu";
     private static KafkaProducer<String,List<String>> producer = null;
     private static KafkaConsumer<String,List<String>> consumer = null;
+    private static List<TransformerExecution> transformerExecutionList = null;
 
 
 
 
-    public KafkaQueue(String host, String topic, String clientId, String groupId) {
+
+    public KafkaQueue(String host, String topic, String clientId, String groupId,List<TransformerExecution> transformerExecutionList) {
         this.host=host;
         this.topic=topic;
         this.clientId=clientId;
         this.groupId=groupId;
+        this.transformerExecutionList=transformerExecutionList;
         init();
     }
 

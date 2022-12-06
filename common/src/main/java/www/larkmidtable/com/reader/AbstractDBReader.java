@@ -75,6 +75,7 @@ public abstract class AbstractDBReader extends Reader {
 			}
             records.add(JSONObject.toJSONString(map));
         }
+        //责任链模式执行数据清洗/转换
         Channel.getQueue().add(records);
     }
 

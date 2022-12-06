@@ -22,7 +22,8 @@ kafka:
   clientId: hu_client
   groupId: hu_group
 
-
-
 log:
   logPath: D:\temp\data\hulogs
+
+transformer:
+  - {"name": "dx_digest","parameter":{ "columnName":"role_key","paras":["md5", "toLowerCase"] }}
