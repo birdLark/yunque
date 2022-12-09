@@ -61,7 +61,6 @@ public class YunQueStart {
 		logger.info("作业名称{} ,作业ID{} ,作业的路径{}", jobName , jobId , yamlPath);
 		logger.info("读取作业配置文件....");
 		BufferedReader br = null;
-		 yamlPath="D:\\java\\code\\etl\\honghu\\conf\\mysql2mysql.yaml";
 		try {
 			br = new BufferedReader(new FileReader(yamlPath));
 		} catch (FileNotFoundException e) {
