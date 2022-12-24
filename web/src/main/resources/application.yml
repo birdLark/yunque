@@ -1,0 +1,17 @@
+#springboot 内置属性
+# https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html
+
+# 服务器的端口
+server:
+  port: 80
+
+# 修改banner
+spring:
+  banner:
+    image:
+      location: logo.png
+
+# 日志的级别
+logging:
+  level:
+    root: info

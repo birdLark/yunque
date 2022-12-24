@@ -6,5 +6,10 @@
 
 4.内嵌tomcat，依赖的spring-boot-starter-web中依赖的有tomcat
 
+5.application.properties文件中，配置端口 
+server.port=80
+
+
+
 
 
