@@ -139,15 +139,15 @@ Tony_cen、小小若木、无说有听、dearong、修真、sockstack
 
 
 
-Cole、轮子、彪哥、倪~喜、冯~孝、Aphasia、Yezhiwei、农民
+Cole、轮子、彪哥、倪#喜、冯#孝、Aphasia、Yezhiwei、农民
 
 
 
-navy、object、JSZ、全儿、恒古指针、~漫、MikeChen、冲浪仔
+navy、object、JSZ、全儿、恒古指针、#漫、MikeChen、冲浪仔
 
 
 
-iDrive、abc、火箭、云风叶、payne、黄~峰、余~忠、就这~
+iDrive、abc、火箭、云风叶、payne、黄#峰、余#忠、就这#
 
 
 
