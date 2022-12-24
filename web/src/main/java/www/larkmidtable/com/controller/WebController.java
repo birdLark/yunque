@@ -1,8 +1,6 @@
 package www.larkmidtable.com.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -14,9 +12,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/yunque")
 public class WebController {
 
-	@GetMapping
-	public String getById(){
-		System.out.println("YunQue is running");
-		return "YunQue getById";
+	@PostMapping
+	public String save(){
+		return "yunque add";
 	}
+
+	@DeleteMapping("/{id}")
+	public String delete(){
+		return "yunque delete";
+	}
+
+	@PutMapping
+	public String update(){
+		return "yunque update";
+	}
+
+	@GetMapping("/{id}")
+	public  String getById(){
+		return "yunque getById";
+	}
+
+	@GetMapping
+	public String getAll(){
+		return "yunque getAll";
+	}
+
 }
