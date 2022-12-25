@@ -19,7 +19,9 @@ public class YunQueWebTest {
 
 
 	@Test
-	public void test() {
-		System.out.println(taskDao.selectById(1));
+	public void testSelectById() {
+		taskDao.selectById(1);
 	}
+
+
 }

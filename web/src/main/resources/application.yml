@@ -24,8 +24,14 @@ logging:
   level:
     root: info
 
-
-#mybatis-plus:
+# MybatisPlus的配置
+mybatis-plus:
 #  global-config:
 #    db-config:
+      # 前缀
 #      table-prefix: tb_
+      # id自增长
+#      id-type: auto
+  # 打印日志(测试时候用)
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
