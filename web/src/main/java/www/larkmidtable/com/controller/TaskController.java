@@ -1,11 +1,11 @@
 package www.larkmidtable.com.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import www.larkmidtable.com.domain.Task;
 import www.larkmidtable.com.service.ITaskService;
+import www.larkmidtable.com.util.R;
 
 import java.util.List;
 
@@ -23,36 +23,34 @@ public class TaskController {
 	private ITaskService taskService;
 
 	@GetMapping
-	public List<Task> getAll(){
-		return taskService.list();
+	public R getAll() {
+		return new R(true,taskService.list());
 	}
 
 
 	@PostMapping
-	public Boolean save(@RequestBody  Task task){
-		return taskService.save(task);
+	public R save(@RequestBody Task task) {
+		return new R(true,taskService.save(task));
 	}
 
 	@PutMapping
-	public Boolean update(@RequestBody Task task){
-		return taskService.updateById(task);
+	public R update(@RequestBody Task task) {
+		return new R(true,taskService.updateById(task));
 	}
 
 	@DeleteMapping("{id}")
-	public Boolean delete(@PathVariable  Integer id ){
-		return taskService.removeById(id);
+	public R delete(@PathVariable Integer id) {
+		return new R(true,taskService.removeById(id));
 	}
 
 	@GetMapping("{id}")
-	public  Task getById(@PathVariable  Integer id){
-		return taskService.getById(id);
+	public R getById(@PathVariable Integer id) {
+		return new R(true,taskService.getById(id));
 	}
 
-@GetMapping("{currentPage}/{pageSize}")
-	public IPage<Task> getPage(@PathVariable int currentPage,@PathVariable int pageSize){
-		return taskService.getPage(currentPage,pageSize);
-}
-
-
+	@GetMapping("{currentPage}/{pageSize}")
+	public R getPage(@PathVariable int currentPage, @PathVariable int pageSize) {
+		return new R(true,taskService.getPage(currentPage, pageSize));
+	}
 
 }
