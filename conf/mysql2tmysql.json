@@ -1,0 +1,22 @@
+{
+  "reader": {
+    "plugin": "mysqlreader",
+    "url": "jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC",
+    "username": "root",
+    "password": "root",
+    "table":  "student",
+    "column": "id,name,address",
+    "thread": "1"
+  },
+  "writer": {
+    "plugin": "mysqlwriter",
+    "url": "jdbc:mysql://localhost:3306/filedb?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC",
+    "username": "root",
+    "password": "root",
+    "table":  "student_1",
+    "column": "id,name,address"
+  },
+  "log": {
+    "logPath": "D:\\temp\\data\\hulogs"
+  }
+}

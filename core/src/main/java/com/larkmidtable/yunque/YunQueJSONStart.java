@@ -2,6 +2,7 @@ package com.larkmidtable.yunque;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.larkmidtable.yunque.config.ConfigConstant;
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -25,19 +26,19 @@ import www.larkmidtable.com.writer.Writer;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 
 /**
- *
- *
+ * 传递的配置文件为JSON
  * @Date: 2022/11/10 14:28
  * @Description:
  **/
-public class YunQueStart {
-	private static Logger logger = LoggerFactory.getLogger(YunQueStart.class);
+public class YunQueJSONStart {
+	private static Logger logger = LoggerFactory.getLogger(YunQueJSONStart.class);
 
 	public static void main(String[] args) throws ParseException {
 
@@ -47,29 +48,36 @@ public class YunQueStart {
 		Options options = new Options();
 		options.addOption("job", true, "作业配置");
 		options.addOption("jobId", true, "作业id");
-		options.addOption("yamlPath", true, "yaml的路径");
+		options.addOption("jsonPath", true, "json的路径");
 
 		BasicParser parser = new BasicParser();
 		CommandLine cl = parser.parse(options, args);
 		String jobName = cl.getOptionValue("job");
 		String jobIdString = cl.getOptionValue("jobId");
-		String yamlPath = cl.getOptionValue("yamlPath");
+		String jsonPath = cl.getOptionValue("jsonPath");
 		long jobId=-1;
 		if (jobIdString!=null && !"-1".equalsIgnoreCase(jobIdString)) {
 			jobId = Long.parseLong(jobIdString);
 		}
-		logger.info("作业名称{} ,作业ID{} ,作业的路径{}", jobName , jobId , yamlPath);
+		logger.info("作业名称{} ,作业ID{} ,作业的路径{}", jobName , jobId , jsonPath);
 		logger.info("读取作业配置文件....");
 		BufferedReader br = null;
+		StringBuffer jsonBuffer =new StringBuffer();
 		try {
-			br = new BufferedReader(new FileReader(yamlPath));
+			br = new BufferedReader(new FileReader(jsonPath));
+			String contentLine = br.readLine();
+			while (contentLine != null) {
+				jsonBuffer.append(contentLine);
+				contentLine = br.readLine();
+			}
 		} catch (FileNotFoundException e) {
 			throw new HongHuException("文件获取不到", e);
 		} catch (NullPointerException e) {
 			throw new HongHuException("需要传递参数yamlPath，详情见用户手册", e);
+		} catch (IOException e) {
+			throw new HongHuException("读取json文件出错，详情见用户手册", e);
 		}
-		Yaml yaml = new Yaml();
-		Map<String, Map<String, String>> jobMap = (Map<String, Map<String, String>>) yaml.load(br);
+		Map<String, Map<String, String>> jobMap = JSON.parseObject (jsonBuffer.toString().trim(),Map.class);
 		logger.info("解析配置文件....");
 		//日志初始化
 		Map<String, String> jobConfig = jobMap.get(ConfigConstant.LOG);
