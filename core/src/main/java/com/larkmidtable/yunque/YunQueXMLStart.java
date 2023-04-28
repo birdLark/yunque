@@ -28,6 +28,7 @@ import java.io.FileReader;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -103,6 +104,18 @@ public class YunQueXMLStart {
 		Channel channel=new DefaultChannel(transformerExecutionList);
 		channel.channel(reader, writer);
 		logger.info("结束迁移任务....");
+
+		Runtime.getRuntime().addShutdownHook(new Thread(){
+			@Override
+			public void run() {
+				try {
+					System.out.println("关闭整个应用的时候，关闭线程池...");
+					TimeUnit.SECONDS.sleep(2);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
 	}
 }
