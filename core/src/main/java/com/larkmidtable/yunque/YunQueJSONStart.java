@@ -114,6 +114,7 @@ public class YunQueJSONStart {
 		channel.channel(reader, writer);
 		logger.info("结束迁移任务....");
 
+		// 资源释放
 		Runtime.getRuntime().addShutdownHook(new Thread(){
 			@Override
 			public void run() {

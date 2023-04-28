@@ -105,11 +105,12 @@ public class YunQueXMLStart {
 		channel.channel(reader, writer);
 		logger.info("结束迁移任务....");
 
+		// 资源释放
 		Runtime.getRuntime().addShutdownHook(new Thread(){
 			@Override
 			public void run() {
 				try {
-					System.out.println("关闭整个应用的时候，关闭线程池...");
+//					executorService.shutdown();
 					TimeUnit.SECONDS.sleep(2);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
