@@ -20,6 +20,7 @@ import www.larkmidtable.com.log.HuLogger;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.transformer.TransformerExecution;
 import www.larkmidtable.com.transformer.TransformerInfo;
+import www.larkmidtable.com.util.JVMUtil;
 import www.larkmidtable.com.util.TransformerUtil;
 import www.larkmidtable.com.writer.Writer;
 
@@ -30,6 +31,9 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 
@@ -105,27 +109,33 @@ public class YunQueJSONStart {
 		Reader reader = Reader.getReaderPlugin(readerPlugin,readerConfigBean);
 		Writer writer = Writer.getWriterPlugin(writerPlugin,writerConfigBean);
 
+ 		logger.info("创建读写的线程池和计数器...");
+		CountDownLatch readerCountDownLatch = new CountDownLatch(readerConfigBean.getThread());
+		ExecutorService readerexecutor = Executors.newFixedThreadPool(readerConfigBean.getThread());
+		CountDownLatch writerCountDownLatch = new CountDownLatch(writerConfigBean.getThread());
+		ExecutorService writerexecutor = Executors.newFixedThreadPool(writerConfigBean.getThread());
+
 		logger.info("进行读写任务....");
-		HuLogger.log("进行读写任务....");
 		//通过new KafkaChannel 切换队列
 		/*Map<String, String> kafkaConfig = jobMap.get(ConfigConstant.KAFKA);
 		Channel channel = new KafkaChannel(kafkaConfig.get(ConfigConstant.HOST),kafkaConfig.get(ConfigConstant.TOPIC),kafkaConfig.get(ConfigConstant.CLIENTID),kafkaConfig.get(ConfigConstant.GROUPID));*/
 		Channel channel=new DefaultChannel(transformerExecutionList);
-		channel.channel(reader, writer);
+		channel.channel(reader, writer,readerCountDownLatch,readerexecutor,
+				writerCountDownLatch,writerexecutor);
 		logger.info("结束迁移任务....");
 
 		// 资源释放
-		Runtime.getRuntime().addShutdownHook(new Thread(){
-			@Override
-			public void run() {
-				try {
-					System.out.println("关闭整个应用的时候，关闭线程池...");
-					TimeUnit.SECONDS.sleep(2);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		JVMUtil.shutdownThreadPool(readerexecutor,reader,writer);
+		JVMUtil.shutdownThreadPool(writerexecutor,reader,writer);
+		try {
+			readerCountDownLatch.await();
+			writerCountDownLatch.await();
+		} catch (InterruptedException e) {
+			logger.error("线程等待报错...");
+			e.printStackTrace();
+		}
+
+		System.exit(0);
 
 	}
 }

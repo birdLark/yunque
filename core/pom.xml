@@ -166,7 +166,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.larkmidtable.yunque.YunQueXMLStart</mainClass>
+							<mainClass>com.larkmidtable.yunque.YunQueYAMLStart</mainClass>
 						</manifest>
 						<manifestEntries>
 							<Class-Path>.</Class-Path>

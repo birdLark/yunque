@@ -1,12 +1,14 @@
 package www.larkmidtable.com.channel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import www.larkmidtable.com.reader.Reader;
-import www.larkmidtable.com.transformer.TransformerExecution;
 import www.larkmidtable.com.writer.Writer;
 
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 
 /**
  *
@@ -15,6 +17,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @Description:
  **/
 public  abstract class Channel {
+	private static Logger logger = LoggerFactory.getLogger(Channel.class);
 
 	private static Queue<List<String>> queue = null;
 
@@ -26,20 +29,40 @@ public  abstract class Channel {
 		this.queue = queue;
 	}
 
-	public  void channel(Reader reader, Writer writer)  {
+	public  void channel(Reader reader, Writer writer, CountDownLatch readerCountDownLatch,
+			ExecutorService readerexecutor, CountDownLatch writerCountDownLatch, ExecutorService writerexecutor)  {
 		try {
+			// 1.init 初始化
 			reader.open();
 			writer.open();
+
+			// 2.多线程并行读取
+			Integer readerThread = reader.getConfigBean().getThread();
 			String[] inputSplits = reader.createInputSplits();
+			for (int i = 0; i < readerThread; i++) {
+				readerexecutor.submit(() -> {
+					try {
+						reader.startRead(inputSplits);
+						readerCountDownLatch.countDown();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				});
+			}
 
-			// @TODO 向Channel中写入
-			reader.startRead(inputSplits);
+			// 3.多线程并行写入
+			Integer writerThread = writer.getConfigBean().getThread();
+			for (int i = 0; i < writerThread; i++) {
+				writerexecutor.submit(() -> {
+					try {
+						writer.startWrite();
+						writerCountDownLatch.countDown();
+					} catch (Exception e ) {
+						e.printStackTrace();
+					}
+				});
+			}
 
-			// @TODO 向Channel中读取
-			writer.startWrite();
-
-			reader.close();
-			writer.close();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

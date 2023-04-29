@@ -16,4 +16,5 @@ public class ConfigBean {
 	private   String password ;
 	private   String table ;
 	private   String column ;
+	private   Integer thread;
 }

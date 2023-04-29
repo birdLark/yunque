@@ -1,4 +1,4 @@
-import com.larkmidtable.yunque.YunQueXMLStart;
+import com.larkmidtable.yunque.YunQueYAMLStart;
 import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,6 @@ import www.larkmidtable.com.util.JVMUtil;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -17,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  **/
 public class ThreadTest {
 	// 定义日志对象
-	private static Logger logger = LoggerFactory.getLogger(YunQueXMLStart.class);
+	private static Logger logger = LoggerFactory.getLogger(YunQueYAMLStart.class);
 
 	public static void main(String[] args) throws ParseException, InterruptedException {
 
