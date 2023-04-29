@@ -7,8 +7,7 @@ import www.larkmidtable.com.writer.Writer;
 
 import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.*;
 
 /**
  *
@@ -19,7 +18,7 @@ import java.util.concurrent.ExecutorService;
 public  abstract class Channel {
 	private static Logger logger = LoggerFactory.getLogger(Channel.class);
 
-	private static Queue<List<String>> queue = null;
+	private static  Queue<List<String>> queue = null;
 
 	public static Queue<List<String>> getQueue() {
 		return queue;
@@ -35,6 +34,7 @@ public  abstract class Channel {
 			// 1.init 初始化
 			reader.open();
 			writer.open();
+			this.queue = new ArrayBlockingQueue<>(10);
 
 			// 2.多线程并行读取
 			Integer readerThread = reader.getConfigBean().getThread();

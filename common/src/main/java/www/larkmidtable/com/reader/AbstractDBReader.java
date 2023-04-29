@@ -3,10 +3,7 @@ package www.larkmidtable.com.reader;
 import com.alibaba.fastjson.JSONObject;
 import www.larkmidtable.com.channel.Channel;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,8 +62,8 @@ public abstract class AbstractDBReader extends Reader {
     public void defaultSingleStartRead(Connection connection, String inputSplit) throws Exception {
         List<String> records = new ArrayList<>();
         // String sql = String.format("select * from %s", configBean.getTable());
-        CallableStatement callableStatement = connection.prepareCall(inputSplit);
-        ResultSet resultSet = callableStatement.executeQuery();
+		PreparedStatement preparedStatement = connection.prepareStatement(inputSplit);
+        ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
         	Map<String ,Object> map = new HashMap<>();
 			ResultSetMetaData metaData = resultSet.getMetaData();
@@ -75,6 +72,7 @@ public abstract class AbstractDBReader extends Reader {
 			}
             records.add(JSONObject.toJSONString(map));
         }
+		System.out.println(records.toString());
         //责任链模式执行数据清洗/转换
         Channel.getQueue().add(records);
     }
@@ -84,11 +82,8 @@ public abstract class AbstractDBReader extends Reader {
         int count = count();
         if (count > 0 && 1 == 1) {// 1==1 后续可开启切分SQL配置参数
             // 拆分的大小
-            int size = count / DEFAULT_BATCH_SIZE;
+            int size = this.getConfigBean().getThread();
             int lastCount = count % DEFAULT_BATCH_SIZE;
-            if (lastCount > 0) {
-                size = size + 1;
-            }
             for (int i = 0; i < size; i++) {
                 StringBuilder builder = new StringBuilder("SELECT "+column+" FROM ( ");
                 builder.append(" ").append(originInput).append(" ) t").append(" ").append("LIMIT");
@@ -101,7 +96,6 @@ public abstract class AbstractDBReader extends Reader {
                 }
                 splits.add(builder.toString());
             }
-
         } else {
             splits.add(originInput);
         }

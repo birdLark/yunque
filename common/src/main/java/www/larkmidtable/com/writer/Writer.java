@@ -41,7 +41,7 @@ public abstract class Writer {
 	public abstract void open();
 
 	// 开始写操作
-	public abstract void startWrite();
+	public abstract void startWrite() throws InterruptedException;
 
 	// 关闭操作
 	public abstract void close() throws IOException;

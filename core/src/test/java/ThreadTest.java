@@ -39,7 +39,7 @@ public class ThreadTest {
 			});
 		}
 		//
-		JVMUtil.shutdownThreadPool(executor);
+//		JVMUtil.shutdownThreadPool(executor);
 		// 主线程在阻塞，当计数器==0，就唤醒主线程往下执行。
 		countDownLatch.await();
 		System.exit(0);

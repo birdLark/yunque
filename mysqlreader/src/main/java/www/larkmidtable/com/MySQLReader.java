@@ -39,45 +39,45 @@ public class MySQLReader extends AbstractDBReader {
         }
     }
 
-//    @Override
-//    public Queue<List<String>> startRead(String[] inputSplits) {
-//        logger.info("MySQL读取数据操作....");
-//        try {
-//            if (inputSplits.length > 1) {
-//                // 开启多线程肚
-//                batchStartRead(connection, inputSplits);
-//            } else {
-//                defaultSingleStartRead(connection, inputSplits[0]);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        logger.info("MySQL读取数据结束....");
-//        return Channel.getQueue();
-//    }
     @Override
     public Queue<List<String>> startRead(String[] inputSplits) {
         logger.info("MySQL读取数据操作....");
         try {
-            if(inputSplits.length > 0) {
-                List<MySQLReaderParams> params = new ArrayList<>();
-                for (String inputSplit : inputSplits) {
-                    params.add(new MySQLReaderParams(connection,inputSplit));
-                }
-                MySQLReaderTask mySQLReaderTask = new MySQLReaderTask();
-                mySQLReaderTask.setSingleThreadSize(1);
-                mySQLReaderTask.setTaskParams(params);
-                ForkJoinTask<List<String>> submit = forkJoinPool.submit(mySQLReaderTask);
-                submit.get();//阻塞，内部已经存队列
-                return Channel.getQueue();
-            }
-
+//            if (inputSplits.length > 1) {
+//                // 开启多线程肚
+//                batchStartRead(connection, inputSplits);
+//            } else {
+                defaultSingleStartRead(connection, inputSplits[0]);
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         logger.info("MySQL读取数据结束....");
         return Channel.getQueue();
     }
+//    @Override
+//    public Queue<List<String>> startRead(String[] inputSplits) {
+//        logger.info("MySQL读取数据操作....");
+//        try {
+//            if(inputSplits.length > 0) {
+//                List<MySQLReaderParams> params = new ArrayList<>();
+//                for (String inputSplit : inputSplits) {
+//                    params.add(new MySQLReaderParams(connection,inputSplit));
+//                }
+//                MySQLReaderTask mySQLReaderTask = new MySQLReaderTask();
+//                mySQLReaderTask.setSingleThreadSize(1);
+//                mySQLReaderTask.setTaskParams(params);
+//                ForkJoinTask<List<String>> submit = forkJoinPool.submit(mySQLReaderTask);
+//                submit.get();//阻塞，内部已经存队列
+//                return Channel.getQueue();
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        logger.info("MySQL读取数据结束....");
+//        return Channel.getQueue();
+//    }
 
 
     @Override
