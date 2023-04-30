@@ -34,15 +34,16 @@ public  abstract class Channel {
 			// 1.init 初始化
 			reader.open();
 			writer.open();
-			this.queue = new ArrayBlockingQueue<>(10);
+			this.queue = new ArrayBlockingQueue<>(20000);
 
 			// 2.多线程并行读取
 			Integer readerThread = reader.getConfigBean().getThread();
 			String[] inputSplits = reader.createInputSplits();
 			for (int i = 0; i < readerThread; i++) {
+				final int n = i;//内部类里m不能直接用,所以赋值给n
 				readerexecutor.submit(() -> {
 					try {
-						reader.startRead(inputSplits);
+						reader.startRead(inputSplits[n]);
 						readerCountDownLatch.countDown();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -56,7 +57,7 @@ public  abstract class Channel {
 				writerexecutor.submit(() -> {
 					try {
 						writer.startWrite();
-						writerCountDownLatch.countDown();
+//						writerCountDownLatch.countDown();
 					} catch (Exception e ) {
 						e.printStackTrace();
 					}

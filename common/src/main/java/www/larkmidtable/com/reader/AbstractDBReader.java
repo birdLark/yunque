@@ -72,9 +72,9 @@ public abstract class AbstractDBReader extends Reader {
 			}
             records.add(JSONObject.toJSONString(map));
         }
-		System.out.println(records.toString());
-        //责任链模式执行数据清洗/转换
-        Channel.getQueue().add(records);
+//		System.out.println(records.toString());
+		//责任链模式执行数据清洗/转换
+		Channel.getQueue().add(records);
     }
 
     public List<String> defaultInputSplits(String column,String originInput) {

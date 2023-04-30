@@ -48,8 +48,13 @@ public class DB2Reader extends AbstractDBReader {
         return Channel.getQueue();
     }
 
+	@Override
+	public Queue<List<String>> startRead(String inputSplit) {
+		return null;
+	}
 
-    @Override
+
+	@Override
     public String[] createInputSplits() {
         logger.info("DB2的Reader开始进行分片开始....");
         String inputSql = String.format("select %s from %s", configBean.getColumn(),configBean.getTable());

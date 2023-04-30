@@ -43,7 +43,6 @@ public class MySQLWriter extends Writer {
 	public void startWrite() throws InterruptedException {
 		logger.info("开始写数据....");
 		List<String> poll = ((ArrayBlockingQueue<List<String>>)Channel.getQueue()).take();
-		System.out.println("---------"+poll.toString());
 		String[] columns = configBean.getColumn().split(",");
 		StringBuffer sb=new StringBuffer();
 		for(int i =0;i<columns.length;i++) {sb.append("?,");}

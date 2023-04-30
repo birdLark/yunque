@@ -29,3 +29,4 @@ Thumbs.db
 .log
 *.class
 yunque-1.0-SNAPSHOT-release.tar.gz
+conf/mysql2tmysql.json
