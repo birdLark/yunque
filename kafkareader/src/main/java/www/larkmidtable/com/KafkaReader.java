@@ -20,6 +20,11 @@ public class KafkaReader extends Reader{
     }
 
     @Override
+    public Queue<List<String>> startRead(String inputSplit) {
+        return null;
+    }
+
+    @Override
     public String[] createInputSplits() {
         return new String[0];
     }

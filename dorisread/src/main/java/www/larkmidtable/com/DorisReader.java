@@ -57,6 +57,11 @@ public class DorisReader extends AbstractDBReader {
 		return Channel.getQueue();
 	}
 
+	@Override
+	public Queue<List<String>> startRead(String inputSplit) {
+		return null;
+	}
+
 
 	@Override
 	public String[] createInputSplits() {
