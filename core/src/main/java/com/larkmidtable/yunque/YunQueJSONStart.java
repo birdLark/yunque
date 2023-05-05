@@ -52,8 +52,8 @@ public class YunQueJSONStart {
         logger.info("核查参数的正确性....");
         if(args.length == 0 ){
         	logger.info("程序尚未传递参数，需要传递参数如下:");
-			logger.error("例如:  -job 名称 -jobId 自定作业ID -jsonPath \"conf目录下的 mysql2tmysql.json 的全路径!!!\"");
-			logger.error("例如:  -job testyunque -jobId testid -jsonPath\"d:....mysql2tmysql.json\"");
+			logger.error("例如: "+"\n"+" -job 名称 -jobId 自定作业ID -jsonPath \"conf目录下的 mysql2tmysql.json 的全路径!!!\""+"\n"
+					+" -job testyunque -jobId testid -jsonPath\"d:....mysql2tmysql.json\""+"\n");
 			System.exit(ExitCode.PARAMEXIT.getExitCode());
         }
 		logger.info("核查参数的完成....");
