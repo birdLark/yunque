@@ -20,6 +20,7 @@ import www.larkmidtable.com.log.HuLogger;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.transformer.TransformerExecution;
 import www.larkmidtable.com.transformer.TransformerInfo;
+import www.larkmidtable.com.util.ExitCode;
 import www.larkmidtable.com.util.JVMUtil;
 import www.larkmidtable.com.util.TransformerUtil;
 import www.larkmidtable.com.writer.Writer;
@@ -34,7 +35,6 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -48,6 +48,15 @@ public class YunQueJSONStart {
 	public static void main(String[] args) throws ParseException {
 
 		logger.info("迁移程序，正式启动中....");
+
+        logger.info("核查参数的正确性....");
+        if(args.length == 0 ){
+        	logger.info("程序尚未传递参数，需要传递参数如下:");
+			logger.error("例如:  -job 名称 -jobId 自定作业ID -jsonPath \"conf目录下的 mysql2tmysql.json 的全路径!!!\"");
+			logger.error("例如:  -job testyunque -jobId testid -jsonPath\"d:....mysql2tmysql.json\"");
+			System.exit(ExitCode.PARAMEXIT.getExitCode());
+        }
+		logger.info("核查参数的完成....");
 
 		logger.info("解析传递的参数....");
 		Options options = new Options();
