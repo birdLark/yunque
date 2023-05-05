@@ -54,6 +54,11 @@ public class PgReader extends AbstractDBReader {
 		return Channel.getQueue();
 	}
 
+	@Override
+	public Queue<List<String>> startRead(String inputSplit) {
+		return null;
+	}
+
 
 	@Override
 	public String[] createInputSplits() {

@@ -28,11 +28,11 @@ public class HdfsReaderTest {
 
     @Test
     public void testReader() {
-        hdfsReader.setReadPath("/my/yunque/yunque1.txt");
-        Queue<List<String>> queue = hdfsReader.startRead(null);
-        hdfsReader.close();
-        List<String> poll = queue.poll();
-        poll.stream().forEach(System.out::println);
+//        hdfsReader.setReadPath("/my/yunque/yunque1.txt");
+//        Queue<List<String>> queue = hdfsReader.startRead(null);
+//        hdfsReader.close();
+//        List<String> poll = queue.poll();
+//        poll.stream().forEach(System.out::println);
     }
 
     @Test

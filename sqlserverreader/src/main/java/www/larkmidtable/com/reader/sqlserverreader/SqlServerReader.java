@@ -54,6 +54,11 @@ public class SqlServerReader extends AbstractDBReader {
 	}
 
 	@Override
+	public Queue<List<String>> startRead(String inputSplit) {
+		return null;
+	}
+
+	@Override
 	public String[] createInputSplits() {
 		logger.info("SqlServer的Reader开始进行分片开始....");
 		String inputSql = String.format("select %s from %s", configBean.getColumn(), configBean.getTable());

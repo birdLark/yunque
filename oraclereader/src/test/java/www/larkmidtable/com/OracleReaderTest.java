@@ -5,7 +5,7 @@ import org.junit.Test;
 import www.larkmidtable.com.bean.ConfigBean;
 import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.reader.oraclereader.OracleReader;
-import www.larkmidtable.com.reader.oraclereader.OracleWriter;
+//import www.larkmidtable.com.reader.oraclereader.OracleWriter;
 import www.larkmidtable.com.util.DBType;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.Queue;
  */
 public class OracleReaderTest {
     private OracleReader oracleReader = new OracleReader();
-    private OracleWriter oracleWriter = new OracleWriter();
+//    private OracleWriter oracleWriter = new OracleWriter();
 
     @Before
     public void init() {
@@ -37,7 +37,7 @@ public class OracleReaderTest {
         configBean.setTable("test");
         configBean.setColumn("name");
         configBean.setPlugin(DBType.MySql.getDriverClass());
-        oracleWriter.setConfigBean(configBean);
+//        oracleWriter.setConfigBean(configBean);
     }
 
     @Test
