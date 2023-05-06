@@ -109,6 +109,27 @@ public class MySQLReader extends AbstractDBReader {
         return results.toArray(array);
     }
 
+    //TODO 王盛开 mysql分片逻辑可能存在错误，单独重写默认分片方法
+    @Override
+    public List<String> defaultInputSplits(String column,String originInput) {
+        List<String> splits = new ArrayList<>();
+        int count = count();
+        if (count > 0 && 1 == 1) {// 1==1 后续可开启切分SQL配置参数
+            // 拆分的大小
+            int size = this.getConfigBean().getThread();
+            for (int i = 0; i < size; i++) {
+                StringBuilder builder = new StringBuilder("SELECT "+column+" FROM ( ");
+                builder.append(" ").append(originInput).append(" ) t").append(" ").append("LIMIT");
+                int limitStart = i * DEFAULT_BATCH_SIZE;
+                builder.append(" ").append(limitStart).append(",").append(DEFAULT_BATCH_SIZE);
+                splits.add(builder.toString());
+            }
+        } else {
+            splits.add(originInput);
+        }
+        return splits;
+    }
+
     @Override
     public void close() {
         try {
