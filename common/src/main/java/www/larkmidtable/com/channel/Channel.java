@@ -57,7 +57,7 @@ public  abstract class Channel {
 				writerexecutor.submit(() -> {
 					try {
 						writer.startWrite();
-//						writerCountDownLatch.countDown();
+						writerCountDownLatch.countDown();
 					} catch (Exception e ) {
 						e.printStackTrace();
 					}
