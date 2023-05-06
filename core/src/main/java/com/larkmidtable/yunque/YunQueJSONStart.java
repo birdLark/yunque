@@ -46,6 +46,7 @@ public class YunQueJSONStart {
 	private static Logger logger = LoggerFactory.getLogger(YunQueJSONStart.class);
 
 	public static void main(String[] args) throws ParseException {
+		args = new String[]{"-job", "test", "-jobId", "1", "-jsonPath", "D:\\develop-2023\\yunque-test\\bin\\test.json"};
 
 		logger.info("迁移程序，正式启动中....");
 
@@ -131,7 +132,6 @@ public class YunQueJSONStart {
 		Channel channel=new DefaultChannel(transformerExecutionList);
 		channel.channel(reader, writer,readerCountDownLatch,readerexecutor,
 				writerCountDownLatch,writerexecutor);
-		logger.info("结束迁移任务....");
 
 		// 资源释放
 		JVMUtil.shutdownThreadPool(readerexecutor,reader,writer);
@@ -143,7 +143,7 @@ public class YunQueJSONStart {
 			logger.error("线程等待报错...");
 			e.printStackTrace();
 		}
-
+		logger.info("结束迁移任务....");
 		System.exit(0);
 
 	}
