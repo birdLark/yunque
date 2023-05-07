@@ -43,15 +43,17 @@ public class YunQueEngine {
 	private static Logger logger = LoggerFactory.getLogger(YunQueEngine.class);
 
 	public static void main(String[] args) throws ParseException {
+		logger.info("Hello! 欢迎使用云雀数据集成....");
+
 		if(args.length == 0) {
 			args = new String[]{"-job",
 					"test",
 					"-jobId",
 					"1",
 					"-path",
-					"E:\\larksource\\A_open\\ee\\yunque\\conf\\mysql2tmysql.json",
+					"E:\\larksource\\A_open\\ee\\yunque\\conf\\mysql2mysql.yaml",
 					"-fileFormat",
-					"JSON"};
+					"YAML"};
 			logger.warn("尚未传递参数，运行的为默认配置....");
 		}
 
@@ -87,19 +89,20 @@ public class YunQueEngine {
 		StringBuffer jsonBuffer =new StringBuffer();
 		try {
 			br = new BufferedReader(new FileReader(path));
-			String contentLine = br.readLine();
-			while (contentLine != null) {
-				jsonBuffer.append(contentLine);
-				contentLine = br.readLine();
-			}
 		} catch (FileNotFoundException e) {
-			throw new YunQueException("文件获取不到", e);
-		}  catch (IOException e) {
-			throw new YunQueException("作业文件配置出错，详情见用户手册配置", e);
+			throw new YunQueException("作业文件路径获取不到，核查参数path的配置....", e);
 		}
-
 		Map<String, Map<String, String>> jobMap = new HashMap<String, Map<String, String>>();
 		if("JSON".equals(fileFormat)) {
+			try {
+				String contentLine = br.readLine();
+				while (contentLine != null) {
+					jsonBuffer.append(contentLine);
+					contentLine = br.readLine();
+				}
+			} catch (IOException e) {
+				throw new YunQueException("作业文件配置出错，详情见用户手册配置....", e);
+			}
 			jobMap = JSON.parseObject (jsonBuffer.toString().trim(),Map.class);
 		} else if("YAML".equals(fileFormat)) {
 			Yaml yaml = new Yaml();
@@ -147,7 +150,7 @@ public class YunQueEngine {
 			readerCountDownLatch.await();
 			writerCountDownLatch.await();
 		} catch (InterruptedException e) {
-			logger.error("线程等待报错...");
+			logger.error("线程等待报错....");
 			e.printStackTrace();
 		}
 		logger.info("结束迁移任务....");

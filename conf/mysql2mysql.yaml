@@ -14,6 +14,7 @@ writer:
   password: "root"
   table: "student_1"
   column: "id,name,address"
+  "thread": 1
 
 
 kafka:
