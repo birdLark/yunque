@@ -71,7 +71,7 @@ public class YunQueEngine {
 		options.addOption("job", true, "作业配置");
 		options.addOption("jobId", true, "作业id");
 		options.addOption("path", true, "作业文件路径");
-		options.addOption("fileFormat", true, "作业文件格式 JSON或者YAML的文件运行");
+		options.addOption("fileFormat", true, "作业文件格式 JSON或者YAML");
 		CommandLine cl = parser.parse(options, args);
 		String jobName = cl.getOptionValue("job");
 		String jobIdString = cl.getOptionValue("jobId");
