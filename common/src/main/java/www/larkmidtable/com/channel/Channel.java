@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.writer.Writer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.*;
@@ -50,6 +51,12 @@ public  abstract class Channel {
 					}
 				});
 			}
+			readerCountDownLatch.await();
+			// 添加结束标识
+			List<String> fList = new ArrayList<String>();
+			fList.add("finished");
+			getQueue().add(fList);
+			System.out.println(getQueue().size());
 
 			// 3.多线程并行写入
 			Integer writerThread = writer.getConfigBean().getThread();
@@ -63,7 +70,6 @@ public  abstract class Channel {
 					}
 				});
 			}
-
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

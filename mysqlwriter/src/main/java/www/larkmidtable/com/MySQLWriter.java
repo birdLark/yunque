@@ -42,18 +42,22 @@ public class MySQLWriter extends Writer {
 	@Override
 	public void startWrite() throws InterruptedException {
 		logger.info("开始写数据....");
-		List<String> poll = ((ArrayBlockingQueue<List<String>>)Channel.getQueue()).take();
-		//TODO 王盛开 mysql writer 存在并发问题，正在排查
-		synchronized (MySQLWriter.class){
+		ArrayBlockingQueue<List<String>> cQueue =(ArrayBlockingQueue<List<String>>)Channel.getQueue();
+		List<String> rList;
+		while(true) {
+			rList=cQueue.take();
+			if(rList.size()==1 && "finished".equals(rList.get(0))) {
+				break;
+			}
 			String[] columns = configBean.getColumn().split(",");
 			StringBuffer sb=new StringBuffer();
 			for(int i =0;i<columns.length;i++) {sb.append("?,");}
 			String whstr = sb.toString().substring(0, sb.toString().length() - 1);
 			String sql = String.format("insert into %s(%s) values (%s)",configBean.getTable(),configBean.getColumn(),whstr);
 			try {
-				statement = connection.prepareStatement(sql); // 批量插入时ps对象必须放到for循环外面
-				for (int i = 0; i < poll.size(); i++) {
-					JSONObject jsonObject = JSONObject.parseObject(poll.get(i));
+				statement = connection.prepareStatement(sql);
+				for (int i = 0; i < rList.size(); i++) {
+					JSONObject jsonObject = JSONObject.parseObject(rList.get(i));
 
 					for(int j =1;j<=columns.length;j++) {
 						statement.setObject(j,jsonObject.get(columns[j-1]));
@@ -72,7 +76,6 @@ public class MySQLWriter extends Writer {
 				e.printStackTrace();
 			}
 		}
-		//TODO 王盛开 mysql writer 存在并发问题，正在排查
 		logger.info("写数据完成....");
 	}
 

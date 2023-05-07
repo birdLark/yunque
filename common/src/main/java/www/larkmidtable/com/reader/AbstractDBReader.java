@@ -1,6 +1,8 @@
 package www.larkmidtable.com.reader;
 
 import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import www.larkmidtable.com.channel.Channel;
 
 import java.sql.*;
@@ -11,10 +13,12 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 public abstract class AbstractDBReader extends Reader {
+
+	private static Logger logger = LoggerFactory.getLogger(AbstractDBReader.class);
     /**
      * 拆分批量默认值，可考虑覆盖配置
      */
-    protected final Integer DEFAULT_BATCH_SIZE = 10000;
+    protected final Integer DEFAULT_BATCH_SIZE = 1;
 
     /**
      * 获取总条数
@@ -72,7 +76,7 @@ public abstract class AbstractDBReader extends Reader {
 			}
             records.add(JSONObject.toJSONString(map));
         }
-//		System.out.println(records.toString());
+		logger.info("添加到队列的记录条数{}",records.size());
 		//责任链模式执行数据清洗/转换
 		Channel.getQueue().add(records);
     }
