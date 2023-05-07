@@ -3,7 +3,7 @@ package www.larkmidtable.com.transformer;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import www.larkmidtable.com.exception.HongHuException;
+import www.larkmidtable.com.exception.YunQueException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class TransformerRegistry {
     public static synchronized void registTransformer(Transformer transformer) {
         checkName(transformer.getTransformerName());
         if (registedTransformer.containsKey(transformer.getTransformerName())) {
-            throw new HongHuException(TransformerErrorCode.TRANSFORMER_DUPLICATE_ERROR);
+            throw new YunQueException(TransformerErrorCode.TRANSFORMER_DUPLICATE_ERROR);
         }
         registedTransformer.put(transformer.getTransformerName(),transformer);
     }
@@ -47,7 +47,7 @@ public class TransformerRegistry {
             checkResult = false;
         }
         if (!checkResult) {
-            throw new HongHuException(TransformerErrorCode.TRANSFORMER_NAME_ERROR);
+            throw new YunQueException(TransformerErrorCode.TRANSFORMER_NAME_ERROR);
         }
     }
 

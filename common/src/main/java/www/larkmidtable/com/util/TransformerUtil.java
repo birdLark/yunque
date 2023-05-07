@@ -2,7 +2,7 @@ package www.larkmidtable.com.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import www.larkmidtable.com.exception.HongHuException;
+import www.larkmidtable.com.exception.YunQueException;
 import www.larkmidtable.com.transformer.*;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class TransformerUtil {
         for (TransformerInfo transformerInfo : transformerInfos) {
             Transformer transformer= TransformerRegistry.getTransformer(transformerInfo.getName());
             if (transformer == null) {
-                throw new HongHuException(TransformerErrorCode.TRANSFORMER_NOTFOUND_ERROR, "name=" + transformerInfo.getName());
+                throw new YunQueException(TransformerErrorCode.TRANSFORMER_NOTFOUND_ERROR, "name=" + transformerInfo.getName());
             }
 
 

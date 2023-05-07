@@ -5,7 +5,7 @@ import java.util.Queue;
 
 import www.larkmidtable.com.bean.ConfigBean;
 import www.larkmidtable.com.constant.ReaderPluginEnum;
-import www.larkmidtable.com.exception.HongHuException;
+import www.larkmidtable.com.exception.YunQueException;
 
 /**
  *
@@ -46,7 +46,7 @@ public abstract class Reader {
 			reader.setConfigBean(readerConfigBean);
 			return reader;
 		} catch (Exception e) {
-			throw new HongHuException("文件获取不到", e);
+			throw new YunQueException("文件获取不到", e);
 		}
 
 	}

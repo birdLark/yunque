@@ -3,12 +3,10 @@ package www.larkmidtable.com.transformer;
 
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import www.larkmidtable.com.exception.HongHuException;
+import www.larkmidtable.com.exception.YunQueException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +49,7 @@ public class DigestTransformer extends Transformer {
                 throw new RuntimeException("dx_digest paras index 2 must be toUpperCase or toLowerCase");
             }
         } catch (Exception e) {
-            throw new HongHuException(TransformerErrorCode.TRANSFORMER_ILLEGAL_PARAMETER, e);
+            throw new YunQueException(TransformerErrorCode.TRANSFORMER_ILLEGAL_PARAMETER, e);
         }
         List<String> newRecord=new ArrayList<>();
         try {
@@ -75,7 +73,7 @@ public class DigestTransformer extends Transformer {
                 }
             });
         } catch (Exception e) {
-            throw new HongHuException(TransformerErrorCode.TRANSFORMER_RUN_EXCEPTION, e);
+            throw new YunQueException(TransformerErrorCode.TRANSFORMER_RUN_EXCEPTION, e);
         }
         LOG.debug("DigestTransformer evaluate end");
         return newRecord;

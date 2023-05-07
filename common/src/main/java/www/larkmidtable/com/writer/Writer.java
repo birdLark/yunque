@@ -2,11 +2,9 @@ package www.larkmidtable.com.writer;
 
 import www.larkmidtable.com.bean.ConfigBean;
 import www.larkmidtable.com.constant.WriterPluginEnum;
-import www.larkmidtable.com.exception.HongHuException;
+import www.larkmidtable.com.exception.YunQueException;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Queue;
 
 /**
  *
@@ -33,7 +31,7 @@ public abstract class Writer {
 			writer.getClass();
 			return writer;
 		} catch (Exception e) {
-			throw new HongHuException("文件获取不到", e);
+			throw new YunQueException("文件获取不到", e);
 		}
 	}
 
