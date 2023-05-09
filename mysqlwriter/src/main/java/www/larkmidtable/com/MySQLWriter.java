@@ -43,39 +43,42 @@ public class MySQLWriter extends Writer {
 	public void startWrite() throws InterruptedException {
 		logger.info("开始写数据....");
 		ArrayBlockingQueue<List<String>> cQueue =(ArrayBlockingQueue<List<String>>)Channel.getQueue();
-		List<String> rList;
-		while(true) {
-			rList=cQueue.take();
-			if(rList.size()==1 && "finished".equals(rList.get(0))) {
-				break;
-			}
+		List<String> rList = cQueue.take();;
+//		while(true) {
+//			rList=cQueue.take();
+//			if(rList.size()==1 && "finished".equals(rList.get(0))) {
+//				break;
+//			}
 			String[] columns = configBean.getColumn().split(",");
 			StringBuffer sb=new StringBuffer();
 			for(int i =0;i<columns.length;i++) {sb.append("?,");}
 			String whstr = sb.toString().substring(0, sb.toString().length() - 1);
 			String sql = String.format("insert into %s(%s) values (%s)",configBean.getTable(),configBean.getColumn(),whstr);
 			try {
-				statement = connection.prepareStatement(sql);
-				for (int i = 0; i < rList.size(); i++) {
-					JSONObject jsonObject = JSONObject.parseObject(rList.get(i));
+				//TODO 王盛开 并发存在问题，目前正在调整为statement connection对象线程独享，正在修改
+				synchronized (MySQLWriter.class){
+					statement = connection.prepareStatement(sql);
+					for (int i = 0; i < rList.size(); i++) {
+						JSONObject jsonObject = JSONObject.parseObject(rList.get(i));
 
-					for(int j =1;j<=columns.length;j++) {
-						statement.setObject(j,jsonObject.get(columns[j-1]));
+						for(int j =1;j<=columns.length;j++) {
+							statement.setObject(j,jsonObject.get(columns[j-1]));
+						}
+						statement.addBatch();
+						if (i % 10000 == 0) {
+							statement.executeBatch();
+							connection.commit();
+							statement.clearBatch();
+						}
 					}
-					statement.addBatch();
-					if (i % 10000 == 0) {
-						statement.executeBatch();
-						connection.commit();
-						statement.clearBatch();
-					}
+					statement.executeBatch();
+					connection.commit();
+					statement.clearBatch();
 				}
-				statement.executeBatch();
-				connection.commit();
-				statement.clearBatch();
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+//		}
 		logger.info("写数据完成....");
 	}
 

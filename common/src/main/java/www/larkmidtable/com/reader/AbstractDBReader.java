@@ -18,7 +18,7 @@ public abstract class AbstractDBReader extends Reader {
     /**
      * 拆分批量默认值，可考虑覆盖配置
      */
-    protected final Integer DEFAULT_BATCH_SIZE = 1;
+    protected final Integer DEFAULT_BATCH_SIZE = 10000;
 
     /**
      * 获取总条数
