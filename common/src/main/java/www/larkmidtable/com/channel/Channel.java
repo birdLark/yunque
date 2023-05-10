@@ -51,12 +51,6 @@ public  abstract class Channel {
 					}
 				});
 			}
-//			readerCountDownLatch.await();
-//			// 添加结束标识
-//			List<String> fList = new ArrayList<String>();
-//			fList.add("finished");
-//			getQueue().add(fList);
-//			System.out.println(getQueue().size());
 
 			// 3.多线程并行写入
 			Integer writerThread = writer.getConfigBean().getThread();
