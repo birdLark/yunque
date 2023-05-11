@@ -78,7 +78,9 @@ public abstract class AbstractDBReader extends Reader {
         }
 		logger.info("添加到队列的记录条数{}",records.size());
 		//责任链模式执行数据清洗/转换
-		Channel.getQueue().add(records);
+        if(records.size() != 0){
+            Channel.getQueue().add(records);
+        }
     }
 
     public List<String> defaultInputSplits(String column,String originInput) {
