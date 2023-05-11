@@ -6,6 +6,7 @@ import www.larkmidtable.com.reader.Reader;
 import www.larkmidtable.com.writer.Writer;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.*;
@@ -20,6 +21,37 @@ public  abstract class Channel {
 	private static Logger logger = LoggerFactory.getLogger(Channel.class);
 
 	private static  Queue<List<String>> queue = null;
+
+	private static Queue<List<String>> splitQueueByWriterThreadCount(Queue<List<String>> queue, int count){
+		Queue<List<String>> resultQueue = new LinkedBlockingQueue<>();
+		Queue<String> tempQueue = new LinkedBlockingQueue<>();
+
+		int totalCount = 0;
+		for(List<String> list : queue){
+			totalCount = totalCount + list.size();
+			for(String s : list){
+				tempQueue.add(s);
+			}
+		}
+		int batchCount = totalCount / count + 1;
+
+		while (tempQueue.size() != 0){
+			List<String> list = new ArrayList<>();
+			for(int i = 0; i < batchCount; i ++){
+				String poll = tempQueue.poll();
+				if(poll == null){
+					break;
+				}else{
+					list.add(poll);
+				}
+			}
+			if(list.size() != 0){
+				resultQueue.add(list);
+			}
+		}
+
+		return resultQueue;
+	}
 
 	public static Queue<List<String>> getQueue() {
 		return queue;
@@ -54,6 +86,8 @@ public  abstract class Channel {
 
 			// 3.多线程并行写入
 			Integer writerThread = writer.getConfigBean().getThread();
+			readerCountDownLatch.await();
+			queue = splitQueueByWriterThreadCount(queue, writerThread);
 			for (int i = 0; i < writerThread; i++) {
 				writerexecutor.submit(() -> {
 					try {
