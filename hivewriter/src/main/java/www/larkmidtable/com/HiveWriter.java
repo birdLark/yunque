@@ -46,7 +46,7 @@ public class HiveWriter extends Writer {
 			for (int i = 0; i < poll.size(); i++) {
 				statement.setString(1, poll.get(i));
 				statement.addBatch();
-				if (i % 10000 == 0) {
+				if (i % 10000 == 0 && i > 0) {
 					statement.executeBatch();
 					connection.commit();
 					statement.clearBatch();

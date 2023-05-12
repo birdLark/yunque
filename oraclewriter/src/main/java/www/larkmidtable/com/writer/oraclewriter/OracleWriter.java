@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * @author stave_zhao
@@ -56,7 +55,7 @@ public class OracleWriter extends Writer {
                     statement.setObject(j,jsonObject.get(columns[j-1]));
                 }
                 statement.addBatch();
-                if (i % 10000 == 0) {
+                if (i % 10000 == 0 && i > 0) {
                     statement.executeBatch();
                     connection.commit();
                     statement.clearBatch();

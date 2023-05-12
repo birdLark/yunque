@@ -1,19 +1,17 @@
 package www.larkmidtable.com.writer.sqlserverwriter;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
-
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.fastjson.JSONObject;
-
 import www.larkmidtable.com.channel.Channel;
 import www.larkmidtable.com.util.DBType;
 import www.larkmidtable.com.util.DBUtil;
 import www.larkmidtable.com.writer.Writer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author fei
@@ -59,7 +57,7 @@ public class SqlServerWriter extends Writer {
 					statement.setObject(j, jsonObject.get(columns[j - 1]));
 				}
 				statement.addBatch();
-				if (i % 10000 == 0) {
+				if (i % 10000 == 0 && i > 0) {
 					statement.executeBatch();
 					connection.commit();
 					statement.clearBatch();

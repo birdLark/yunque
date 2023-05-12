@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Queue;
 
 /**
  *
@@ -49,7 +48,7 @@ public class DMWriter extends Writer {
 				statement.setString(1, "mary_" + i);
 				statement.setString(2, poll.get(i));
 				statement.addBatch();
-				if (i % 10000 == 0) {
+				if (i % 10000 == 0 && i > 0) {
 					statement.executeBatch();
 					connection.commit();
 					statement.clearBatch();
