@@ -45,7 +45,14 @@ mvn clean package -DskipTests
 
 
 
-sh start.sh
+sh start.sh -j test -i 12 -p mysql2mysql.yaml -f 'YAML'
+-j -- job 任务名称 
+-i -- jobId 任务ID 
+-p -- path 任务文件路径
+-f -- fileFormat 文件类型
+
+# 6.查看日志
+${baseDir}/logs/start.out
 
 
 
