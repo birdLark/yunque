@@ -25,38 +25,15 @@
 
 ![V1.0的架构图](./docs/images/b.jpg)
 
-
-
-# 4.源码编译
-
-## 4.1获取代码
-
-```
-git clone https://gitee.com/LarkMidTable/yunque.git
-```
-
-## 4.2 编译
-
-```
-mvn clean package -DskipTests
-```
-
-# 5.快速开始
+# 4.快速开始
 
 
 
-sh start.sh -j test -i 12 -p mysql2mysql.yaml -f 'YAML'
--j -- job 任务名称 
--i -- jobId 任务ID 
--p -- path 任务文件路径
--f -- fileFormat 文件类型
-
-# 6.查看日志
-${baseDir}/logs/start.out
+安装部署手册
 
 
 
-# 6.云雀的规划及优点：
+# 5.云雀的规划及优点：
 
 1.云雀目前支持数据源达到14种，能够实现异构数据源的同步。
 

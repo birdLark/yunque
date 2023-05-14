@@ -35,9 +35,9 @@ import java.util.concurrent.Executors;
 
 
 /**
- * 云雀启动类
+ *
  * @Date: 2022/11/10 14:28
- * @Description:
+ * @Description: 云雀启动类
  **/
 public class YunQueEngine {
 	private static Logger logger = LoggerFactory.getLogger(YunQueEngine.class);
