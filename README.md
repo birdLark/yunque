@@ -15,13 +15,13 @@
 
 
 
-# 2.云雀的架构图
+# 2.yunque1.0 设计理念
 
 ![V1.0的架构图](./docs/images/a.jpg)
 
 
 
-# 3.云雀的流程图
+# 3.yunque1.0 框架设计
 
 ![V1.0的架构图](./docs/images/b.jpg)
 
@@ -31,11 +31,13 @@
 
 **下载:** 
 
-初始1.0 [yunque-1.0-SNAPSHOT-release.tar.gz](https://gitee.com/LarkMidTable/yunque/blob/master/version/yunque-1.0-SNAPSHOT-release.tar.gz)
+​	   [yunque-1.0-SNAPSHOT-release.tar.gz](https://gitee.com/LarkMidTable/yunque/blob/master/version/yunque-1.0-SNAPSHOT-release.tar.gz)
 
 
 
-**请点击:** [用户使用手册](https://gitee.com/LarkMidTable/yunque/blob/master/userGuid.md)
+**请点击:** 
+
+​		[用户使用手册](https://gitee.com/LarkMidTable/yunque/blob/master/userGuid.md)
 
 
 
