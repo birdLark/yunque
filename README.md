@@ -15,33 +15,7 @@
 
 
 
-# 2.yunque1.0 设计理念
-
-![V1.0的架构图](./docs/images/a.jpg)
-
-
-
-# 3.yunque1.0 框架设计
-
-![V1.0的架构图](./docs/images/b.jpg)
-
-# 4.快速开始
-
-
-
-**下载:** 
-
-​	   [yunque-1.0-SNAPSHOT-release.tar.gz](https://gitee.com/LarkMidTable/yunque/blob/master/version/yunque-1.0-SNAPSHOT-release.tar.gz)
-
-
-
-**请点击:** 
-
-​		[用户使用手册](https://gitee.com/LarkMidTable/yunque/blob/master/userGuid.md)
-
-
-
-# 5.云雀的规划及优点：
+# 2.目标及特点：
 
 1.云雀目前支持数据源达到14种，能够实现异构数据源的同步。
 
@@ -80,6 +54,32 @@
 
 
 10.云雀遵从Apache协议，可以进行商业化部署。
+
+
+
+# 3.设计理念
+
+![V1.0的架构图](./docs/images/a.jpg)
+
+
+
+# 4.框架设计
+
+![V1.0的架构图](./docs/images/b.jpg)
+
+# 5.快速开始
+
+
+
+**下载:** 
+
+​	   [yunque-1.0-SNAPSHOT-release.tar.gz](https://gitee.com/LarkMidTable/yunque/blob/master/version/yunque-1.0-SNAPSHOT-release.tar.gz)
+
+
+
+**请点击:** 
+
+​		[用户使用手册](https://gitee.com/LarkMidTable/yunque/blob/master/userGuid.md)
 
 
 
