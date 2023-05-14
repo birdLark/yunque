@@ -29,9 +29,13 @@
 
 
 
-下载:  
+**下载:** 
 
-请点击: [用户使用手册](https://gitee.com/LarkMidTable/yunque/blob/master/userGuid.md)
+初始1.0 [yunque-1.0-SNAPSHOT-release.tar.gz](https://gitee.com/LarkMidTable/yunque/blob/master/version/yunque-1.0-SNAPSHOT-release.tar.gz)
+
+
+
+**请点击:** [用户使用手册](https://gitee.com/LarkMidTable/yunque/blob/master/userGuid.md)
 
 
 
