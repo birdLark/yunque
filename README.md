@@ -61,11 +61,19 @@
 
 ![V1.0的架构图](./docs/images/a.jpg)
 
-
+通过使用云雀，可以将多种数据库之间的数据互通和集成，实现将多种数据的迁移，脱敏，聚合操作。
 
 # 4.框架设计
 
 ![V1.0的架构图](./docs/images/b.jpg)
+
+框架分为3部分：Reader,  Channel,  Writer
+
+Reader 作为数据源，     可以通过实现共同的Reader接口，可以通过SQL的方式对数据进行抽取操作。
+
+Channel 作为队列，可选的队列有默认的LinkedBlockingQueue,也可以使用kafka, 通过使用kafka做到一次写入多次读取。
+
+Writer 作为目标数据源，可以通过实现共同的Writer接口，可以通过SQL的方式对数据进行下沉操作。
 
 # 5.快速开始
 
