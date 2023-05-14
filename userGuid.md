@@ -1,10 +1,10 @@
-## 1获取代码
+## 1.获取代码
 
 ```
 git clone https://gitee.com/LarkMidTable/yunque.git
 ```
 
-## 2 编译
+## 2.编译
 
 ```
 mvn clean package -DskipTests
