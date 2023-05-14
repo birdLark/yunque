@@ -40,15 +40,11 @@ fi
 
 export SERVER="com.larkmidtable.yunque.YunQueEngine"
 
-for opt in getopts
-do echo $opt; done
-
 export JOB=""
 export JOB_ID=""
-export FLIE_PATH=""
+export FILE_PATH=""
 export FILE_FORMAT=""
-echo $*
-#echo (getopts)
+
 while getopts ":j:i:f:p:" opt
 do		
     case $opt in
@@ -57,15 +53,15 @@ do
         i)
             JOB_ID=$OPTARG;;
         p)
-	    FLIE_PATH=$OPTARG;;
+	          FILE_PATH=$OPTARG;;
         f)
             FILE_FORMAT=$OPTARG;;
         ?)
         echo "Unknown parameter"
         exit 1;;
     esac
-	echo $opt $OPTARG
 done
+
 echo ${JOB} ${JOB_ID} ${FILE_PATH} ${FILE_FORMAT}
 
 export JAVA_HOME
@@ -89,25 +85,38 @@ else
 fi
 
 # lib
-#JAVA_OPT="${JAVA_OPT} -cp '${BASE_DIR}/lib/*' '${SERVER}' -job ${JOB} -jobId ${JOB_ID} -path ${FLIE_PATH} -fileFormat ${FILE_FORMAT}"
-
+#JAVA_OPT="${JAVA_OPT} -cp '${BASE_DIR}/lib/*' '${SERVER}' -job ${JOB} -jobId ${JOB_ID} -path ${FILE_PATH} -fileFormat ${FILE_FORMAT}"
 
 # 启动
-if [ ! -d "${BASE_DIR}/logs" ]; then
-  mkdir ${BASE_DIR}/logs
+if [ ! -d "${BASE_DIR}/logs/${JOB_ID}" ]; then
+  mkdir -p ${BASE_DIR}/logs/${JOB_ID}
 fi
 
 echo "$JAVA $JAVA_OPT_EXT_FIX ${JAVA_OPT}"
 
 
 # check the start.out log output file
-if [ ! -f "${BASE_DIR}/logs/start.out" ]; then
-  touch "${BASE_DIR}/logs/start.out"
+if [ ! -f "${BASE_DIR}/logs/${JOB_ID}/run.log" ]; then
+  touch "${BASE_DIR}/logs/${JOB_ID}/run.log"
+fi
+# pid 
+
+if [ ! -d "${BASE_DIR}/pids/" ]; then
+  mkdir -p ${BASE_DIR}/pids/
+fi
+
+PIDFILE=${BASE_DIR}/pids/${JOB_ID}.pid
+
+if [ -f "$PIDFILE" ] && kill -0 $(cat "$PIDFILE"); then
+  echo "job is already running..."
+  exit 1
 fi
 
 #启动命令
 #java "$JAVA_OPT_EXT_FIX" ${JAVA_OPT}
-# 后台运行
-nohup ${JAVA} ${JAVA_OPT} -cp "${BASE_DIR}/lib/*" ${SERVER} -job ${JOB} -jobId ${JOB_ID} -path ${FLIE_PATH} -fileFormat ${FILE_FORMAT} >> ${BASE_DIR}/logs/start.out 2>&1 &
-# 前台运行
-#${JAVA} ${JAVA_OPT} -cp "${BASE_DIR}/lib/*" ${SERVER} -job ${JOB} -jobId ${JOB_ID} -path ${FLIE_PATH} -fileFormat ${FILE_FORMAT}
+${JAVA} ${JAVA_OPT} -cp "${BASE_DIR}/lib/*" ${SERVER} -job ${JOB} -jobId ${JOB_ID} -path ${FILE_PATH} -fileFormat ${FILE_FORMAT} >> ${BASE_DIR}/logs/${JOB_ID}/run.log 2>&1 &
+#${JAVA} ${JAVA_OPT} -cp "${BASE_DIR}/lib/*" ${SERVER} -job ${JOB} -jobId ${JOB_ID} -path ${FILE_PATH} -fileFormat ${FILE_FORMAT}
+
+echo $! >> $PIDFILE
+
+echo "${JOB} start up success...."
