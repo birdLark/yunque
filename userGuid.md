@@ -1,19 +1,20 @@
 ## 1.获取代码
 
 ```
-git clone https://gitee.com/LarkMidTable/yunque.git
+$ git clone https://gitee.com/LarkMidTable/yunque.git
 ```
 
 ## 2.编译
 
 ```
-mvn clean package -DskipTests
+$ cd  {yunque_source_code_home}
+$ mvn clean package -DskipTests
 ```
 
 ## 3.运行
 
 ```
-sh start.sh -j test -i 12 -p mysql2mysql.yaml -f 'YAML'
+$ sh start.sh -j test -i 12 -p mysql2mysql.yaml -f 'YAML'
 
 -j -- job 任务名称 
 
@@ -27,5 +28,5 @@ sh start.sh -j test -i 12 -p mysql2mysql.yaml -f 'YAML'
 ## 4.查看日志
 
 ```
-${baseDir}/logs/start.out
+$ cat ${baseDir}/logs/start.out
 ```
