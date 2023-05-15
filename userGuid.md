@@ -1,16 +1,23 @@
-## 1.获取代码
+#### 1.下载云雀源码
 
 ```
 $ git clone https://gitee.com/LarkMidTable/yunque.git
 ```
 
-## 2.编译
+## 2.通过maven打包
 
 ```
 $ cd  {yunque_source_code_home}
 $ mvn clean package -DskipTests
 ```
-
+打包成功，日志显示如下：
+```
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  03:36 min
+[INFO] Finished at: 2023-05-15T14:33:42+08:00
+[INFO] ------------------------------------------------------------------------
+```
 ## 3.运行
 
 ```
