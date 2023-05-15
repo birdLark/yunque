@@ -1,10 +1,12 @@
-#### 1.下载云雀源码
+# Quick Start
+
+### 1.下载云雀源码
 
 ```
 $ git clone https://gitee.com/LarkMidTable/yunque.git
 ```
 
-## 2.通过maven打包
+### 2.通过maven打包
 
 ```
 $ cd  {yunque_source_code_home}
@@ -18,7 +20,7 @@ $ mvn clean package -DskipTests
 [INFO] Finished at: 2023-05-15T14:33:42+08:00
 [INFO] ------------------------------------------------------------------------
 ```
-## 3.运行
+### 3.运行
 
 ```
 $ sh start.sh -j test -i 12 -p mysql2mysql.yaml -f 'YAML'
@@ -32,7 +34,7 @@ $ sh start.sh -j test -i 12 -p mysql2mysql.yaml -f 'YAML'
 -f -- fileFormat 文件类型
 ```
 
-## 4.查看日志
+### 4.查看日志
 
 ```
 $ cat ${baseDir}/logs/start.out
