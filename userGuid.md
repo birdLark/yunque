@@ -20,7 +20,21 @@ $ mvn clean package -DskipTests
 [INFO] Finished at: 2023-05-15T14:33:42+08:00
 [INFO] ------------------------------------------------------------------------
 ```
-### 3.运行
+打包成功后的tar.gz包位于 {yunque_source_code_home},结构如下：
+```
+$ ls {yunque_source_code_home}
+assembly          core       docs                 hdfswriter   kingbasereader  oraclewriter  sqlserverreader  web
+bin               db2reader  dorisread            hivereader   kingbasewriter  pgreader      sqlserverwriter  yunque-1.0-SNAPSHOT-release.tar.gz
+clickhousereader  db2writer  doriswriter          hivewriter   LICENSE         pgwriter      starrocksreader
+clickhousewriter  dmreader   elasticsearchreader  jars         mysqlreader     pom.xml       starrockswriter
+common            dmwriter   elasticsearchwriter  kafkareader  mysqlwriter     README.en.md  userGuid.md
+conf              docker     hdfsreader           kafkawriter  oraclereader    README.md     version
+```
+### 3.配置示例
+
+
+
+### 4.启动
 
 ```
 $ sh start.sh -j test -i 12 -p mysql2mysql.yaml -f 'YAML'
@@ -34,7 +48,7 @@ $ sh start.sh -j test -i 12 -p mysql2mysql.yaml -f 'YAML'
 -f -- fileFormat 文件类型
 ```
 
-### 4.查看日志
+### 5.查看日志
 
 ```
 $ cat ${baseDir}/logs/start.out
