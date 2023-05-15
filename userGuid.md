@@ -20,7 +20,7 @@ $ mvn clean package -DskipTests
 [INFO] Finished at: 2023-05-15T14:33:42+08:00
 [INFO] ------------------------------------------------------------------------
 ```
-打包成功后的tar.gz包位于 {yunque_source_code_home},结构如下：
+打包成功后的tar.gz包位于 {yunque_source_code_home}/yunque-1.0-SNAPSHOT-release.tar.gz,如下：
 ```
 $ ls {yunque_source_code_home}
 assembly          core       docs                 hdfswriter   kingbasereader  oraclewriter  sqlserverreader  web
@@ -29,6 +29,16 @@ clickhousereader  db2writer  doriswriter          hivewriter   LICENSE         p
 clickhousewriter  dmreader   elasticsearchreader  jars         mysqlreader     pom.xml       starrockswriter
 common            dmwriter   elasticsearchwriter  kafkareader  mysqlwriter     README.en.md  userGuid.md
 conf              docker     hdfsreader           kafkawriter  oraclereader    README.md     version
+```
+创建运行目录并解压缩：
+```
+$ mkdir -p /usr/local/yunque-release
+$ cd {yunque_source_code_home}
+$ tar -xzvf yunque-1.0-SNAPSHOT-release.tar.gz -C /usr/local/yunque-release
+```
+运行目录结构如下：
+```
+bin  docker  docs  lib  LICENSE  README.en.md  README.md
 ```
 ### 3.配置示例
 
