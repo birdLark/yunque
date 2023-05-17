@@ -84,5 +84,5 @@ $ sh start.sh -j test -i 12 -p mysql2mysql.yaml -f 'YAML'
 ### 5.查看日志
 
 ```
-$ cat ${baseDir}/logs/start.out
+$ cat ${baseDir}/logs/${jobId}/run.log
 ```

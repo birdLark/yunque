@@ -117,6 +117,6 @@ fi
 ${JAVA} ${JAVA_OPT} -cp "${BASE_DIR}/lib/*" ${SERVER} -job ${JOB} -jobId ${JOB_ID} -path ${FILE_PATH} -fileFormat ${FILE_FORMAT} >> ${BASE_DIR}/logs/${JOB_ID}/run.log 2>&1 &
 #${JAVA} ${JAVA_OPT} -cp "${BASE_DIR}/lib/*" ${SERVER} -job ${JOB} -jobId ${JOB_ID} -path ${FILE_PATH} -fileFormat ${FILE_FORMAT}
 
-echo $! >> $PIDFILE
+echo $! > $PIDFILE
 
 echo "${JOB} start up success...."
