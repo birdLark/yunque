@@ -42,7 +42,36 @@ bin  docker  docs  lib  LICENSE  README.en.md  README.md
 ```
 ### 3.配置示例
 
+以mysql读写插件为例，创建配置文件 mysql2mysql.yaml 内容如下：
+```
+reader:
+  plugin: "mysqlreader"
+  url: "jdbc:mysql://localhost:3306/dev_from?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC"
+  username: "root"
+  password: "******"
+  table: "book"
+  column: "id,name"
+  thread: "2"
 
+writer:
+  plugin: "mysqlwriter"
+  url: "jdbc:mysql://localhost:3306/dev_to?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC"
+  username: "root"
+  password: "*******"
+  table: "book"
+  column: "id,name"
+  thread: "1"
+
+kafka:
+  host: localhost:9092
+  topic: hu_topic
+  clientId: hu_client
+  groupId: hu_group
+
+log:
+  logPath: /temp/data/hulogs
+
+```
 
 ### 4.启动
 
