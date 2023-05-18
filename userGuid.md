@@ -73,11 +73,18 @@ log:
 
 ```
 
-### 4.启动
+### 4.脚本授权并启动
 
 ```
-$ sh start.sh -j test -i 12 -p mysql2mysql.yaml -f 'YAML'
+$ chmod +x start.sh
+$ sh start.sh -j test -i 1 -p ../mysql2mysql.yaml -f YAML
 
+```
+启动日志如下：
+```
+test 1 ../mysql2mysql.yaml YAML
+/data/jdk1.8.0_181/bin/java -Djava.ext.dirs=/data/jdk1.8.0_181/jre/lib/ext:/data/jdk1.8.0_181/lib/ext  -server -Xms512m -Xmx512m -Xmn512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m -XX:-OmitStackTraceInFastThrow -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/usr/local/yunque-release/logs/java_heapdump.hprof -XX:-UseLargePages -XX:+UseConcMarkSweepGC -XX:+UseCMSCompactAtFullCollection -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:SoftRefLRUPolicyMSPerMB=0 -XX:+CMSClassUnloadingEnabled -XX:SurvivorRatio=8  -XX:-UseParNewGC -Xloggc:/usr/local/yunque-release/logs/yunque_gc.log -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=100M
+test start up success....
 ```
 > -j -- job 任务名称 -i -- jobId 任务ID -p -- path 任务文件路径 -f -- fileFormat 文件类型
 
