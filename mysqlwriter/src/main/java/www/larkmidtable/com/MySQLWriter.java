@@ -43,6 +43,7 @@ public class MySQLWriter extends Writer {
 	@Override
 	public void startWrite() throws InterruptedException {
 		logger.info("开始写数据....");
+		long startTime = System.currentTimeMillis();
 		LinkedBlockingQueue<List<String>> cQueue =(LinkedBlockingQueue<List<String>>)Channel.getQueue();
 		List<String> rList = cQueue.poll();
 		if(rList != null && rList.size() > 0){
@@ -75,7 +76,8 @@ public class MySQLWriter extends Writer {
 				e.printStackTrace();
 			}
 		}
-		logger.info("写数据完成....");
+		long endTime = System.currentTimeMillis();
+		logger.info("写数据完成....耗时：" + (endTime - startTime) + "ms");
 	}
 
 	@Override

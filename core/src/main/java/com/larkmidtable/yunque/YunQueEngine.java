@@ -42,8 +42,10 @@ import java.util.concurrent.Executors;
 public class YunQueEngine {
 	private static Logger logger = LoggerFactory.getLogger(YunQueEngine.class);
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws ParseException {
 		logger.info("Hello! 欢迎使用云雀数据集成....");
+		long startTime = System.currentTimeMillis();
 
 		if(args.length == 0) {
 			args = new String[]{"-job",
@@ -51,7 +53,7 @@ public class YunQueEngine {
 					"-jobId",
 					"1",
 					"-path",
-					"E:\\larksource\\A_open\\ee\\yunque\\conf\\mysql2mysql.yaml",
+					"D:\\eclipse-workspace\\yunque\\conf\\mysql2mysql.yaml",
 					"-fileFormat",
 					"YAML"};
 			logger.warn("尚未传递参数，运行的为默认配置....");
@@ -79,11 +81,12 @@ public class YunQueEngine {
 		String jobIdString = cl.getOptionValue("jobId");
 		String path = cl.getOptionValue("path");
 		String fileFormat = cl.getOptionValue("fileFormat");
-		long jobId=-1;
-		if (jobIdString!=null && !"-1".equalsIgnoreCase(jobIdString)) {
+		long jobId = -1;
+		if (jobIdString != null && !"-1".equalsIgnoreCase(jobIdString)) {
 			jobId = Long.parseLong(jobIdString);
 		}
 		logger.info("作业名称{} ,作业ID{} ,作业的路径{} ,作业文件的格式{}", jobName , jobId , path ,fileFormat);
+		
 		logger.info("读取作业配置文件....");
 		BufferedReader br = null;
 		StringBuffer jsonBuffer =new StringBuffer();
@@ -92,7 +95,7 @@ public class YunQueEngine {
 		} catch (FileNotFoundException e) {
 			throw new YunQueException("作业文件路径获取不到，核查参数path的配置....", e);
 		}
-		Map<String, Map<String, String>> jobMap = new HashMap<String, Map<String, String>>();
+		Map<String, Map<String, String>> jobMap = new HashMap<>();
 		if("JSON".equals(fileFormat)) {
 			try {
 				String contentLine = br.readLine();
@@ -101,19 +104,29 @@ public class YunQueEngine {
 					contentLine = br.readLine();
 				}
 			} catch (IOException e) {
+				try {
+					br.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				throw new YunQueException("作业文件配置出错，详情见用户手册配置....", e);
 			}
-			jobMap = JSON.parseObject (jsonBuffer.toString().trim(),Map.class);
+			jobMap = JSON.parseObject(jsonBuffer.toString().trim(),Map.class);
 		} else if("YAML".equals(fileFormat)) {
 			Yaml yaml = new Yaml();
 			jobMap = (Map<String, Map<String, String>>) yaml.load(br);
 		} else {
+			try {
+				br.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			throw new YunQueException("运行模式参数 -fileFormat 取值 <JSON 或者 YAML>....");
 		}
 		logger.info("解析配置文件....");
 		logger.info("加载Transformer插件....");
-		List<TransformerExecution> transformerExecutionList=null;
-		if(jobMap.get(ConfigConstant.TRANSFORMER)!=null){
+		List<TransformerExecution> transformerExecutionList = null;
+		if (jobMap.get(ConfigConstant.TRANSFORMER) != null) {
 			List<TransformerInfo> transformerInfos= JSONArray.parseArray(JSONArray.toJSONString(jobMap.get(ConfigConstant.TRANSFORMER)),TransformerInfo.class);
 			transformerExecutionList = TransformerUtil.buildTransformerInfo(transformerInfos);
 		}
@@ -154,6 +167,8 @@ public class YunQueEngine {
 			e.printStackTrace();
 		}
 		logger.info("结束迁移任务....");
+		long endTime = System.currentTimeMillis();
+		logger.info("任务总耗时："+ (endTime - startTime) +"ms");
 		System.exit(ExitCode.CALLBACKEXIT.getExitCode());
 	}
 }
