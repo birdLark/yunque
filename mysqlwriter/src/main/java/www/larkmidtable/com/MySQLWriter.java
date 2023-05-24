@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -85,10 +86,16 @@ public class MySQLWriter extends Writer {
 		try {
 			logger.info("MySQL的Writer开始进行关闭连接开始....");
 			while (statementQueue.size() != 0){
-				statementQueue.poll().close();
+				PreparedStatement preparedStatement = statementQueue.poll();
+				if(Objects.nonNull(preparedStatement)) {
+					preparedStatement.close();
+				}
 			}
 			while (connectionQueue.size() != 0){
-				connectionQueue.poll().close();
+				Connection connection = connectionQueue.poll();
+				if(Objects.nonNull(connection)) {
+					connection.close();
+				}
 			}
 			logger.info("MySQL的Writer开始进行关闭连接结束....");
 		} catch (SQLException e) {
