@@ -19,4 +19,4 @@
 
 ### 4.图标展示：
 
-![性能测试图v1](./docs/images/performanceTest1.png)
+![性能测试图v1](./docs/images/performanceTest1.jpg)
