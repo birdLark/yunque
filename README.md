@@ -88,9 +88,6 @@ Writer 作为目标数据源，可以通过实现共同的Writer接口，可以�
 **请点击:** 
 
 ​		[用户使用手册](https://gitee.com/LarkMidTable/yunque/blob/master/userGuid.md)
-
-**性能测试**
-
                 [性能测试](https://gitee.com/LarkMidTable/yunque/blob/master/performanceTest.md)
 
 
