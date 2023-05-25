@@ -12,7 +12,7 @@ $ git clone https://gitee.com/LarkMidTable/yunque.git
 $ cd  {yunque_source_code_home}
 $ mvn clean package -DskipTests
 ```
-> 注意：如果是在windows系统编译打包的，bin下的*.sh脚本编码格式是dos，在Linux系统上运行时，需要使用 vim 文件名,然后:set ff 或 :set fileformat 改编码格式。
+> 注意：如果是在windows系统编译打包的，bin下的*.sh脚本编码格式是dos，在Linux系统上运行时，需要使用 vim 文件名,然后set ff=unix 或 :set fileformat=unix改编码格式。
 
 打包成功，日志显示如下：
 ```
